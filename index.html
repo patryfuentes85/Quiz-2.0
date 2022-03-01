@@ -10,7 +10,17 @@
 </head>
 
 <body>
-    <main class="center-content">
+    
+    <!-- Esta sección está en 'display: none' hasta que se haga el log in -->
+    <section class="center-content start-page off">
+        <button type="button" id="log-out-btn">Log Out</button>
+        <div class="statistics">
+            <p>Aquí irán las estadísiticas generales del usuario.</p>
+        </div>
+        <a href="./pages/quiz.html">New Game</a>
+    </section>
+    <!-- Está sección es visible hasta que se hace el log in, y luego desaparece -->
+    <section class="center-content">
         <div id="title">
             <h1>Title</h1>
         </div>
@@ -18,7 +28,7 @@
             <button id="sign-up-btn">Sign Up</button>
             <button id="log-in-btn">Log In</button>
         </div>
-    </main>
+    </section>
 
 
 

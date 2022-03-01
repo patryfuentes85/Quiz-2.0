@@ -8,10 +8,6 @@ html {
     height: 100vh;
 }
 
-.off {
-    display: none;
-}
-
 body {
     display: flex;
     flex-direction: column;
@@ -21,6 +17,17 @@ body {
     height: 100%;
     width: 100vw;
 }
+
+/* START PAGE */
+.start.page {
+    position: relative;
+}
+#log-out-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 
 .center-content {
     display: flex;
@@ -33,4 +40,10 @@ body {
 }
 button {
     margin: 0.5rem 0;
+}
+
+
+
+.off {
+    display: none;
 }
