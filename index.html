@@ -10,17 +10,43 @@
 </head>
 
 <body>
-    <main id="home-container">
-        <h1>Title</h1>
-        <button id="sign-up-btn">Sign Up</button>
-        <button id="log-in-btn">Log In</button>
+    <main class="center-content">
+        <div id="title">
+            <h1>Title</h1>
+        </div>
+        <div class="buttons center-content">
+            <button id="sign-up-btn">Sign Up</button>
+            <button id="log-in-btn">Log In</button>
+        </div>
     </main>
 
 
 
 
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDA3yVi5k-EuRIZJhvRonfFrR2fia0c_Pg",
+            authDomain: "quiz-11126.firebaseapp.com",
+            projectId: "quiz-11126",
+            storageBucket: "quiz-11126.appspot.com",
+            messagingSenderId: "974421179858",
+            appId: "1:974421179858:web:9f2a811ae0e470cb32dc0b"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+    </script>
     <script src="./js/app.js"></script>
 </body>
 

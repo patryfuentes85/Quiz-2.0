@@ -4,21 +4,33 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100vh;
+}
+
+.off {
+    display: none;
+}
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 }
 
-#home-container {
+.center-content {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    justify-content: center;
 }
-.off {
-    display: none;
+#title {
+    margin: 1rem 0;
+    text-align: center;
+}
+button {
+    margin: 0.5rem 0;
 }
