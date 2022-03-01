@@ -34,7 +34,7 @@ const signUpUser = (email, password) => {
                 email: user.email,
             });
 
-            // Se elimina la pantalla de sign in y se revela la start-page
+            // Una vez se ha logado el usuario, se elimina la pantalla de sign in y se revela la pantalla de inicio
             document.querySelector('section:nth-of-type(1)').classList.toggle('off');
             document.querySelector('section:nth-of-type(2)').classList.toggle('off');
 
@@ -54,6 +54,7 @@ const logInUser = (email, password) => {
             console.log(`se ha logado ${user.email} ID:${user.uid}`)
             alert(`se ha logado ${user.email} ID:${user.uid}`)
 
+            // Una vez se ha logado el usuario, se elimina la pantalla de sign in y se revela la pantalla de inicio
             document.querySelector('section:nth-of-type(1)').classList.toggle('off');
             document.querySelector('section:nth-of-type(2)').classList.toggle('off');
         })
@@ -73,6 +74,8 @@ const logOutUser = () => {
     firebase.auth().signOut().then(() => {
         console.log("Sale del sistema: " + user.email)
 
+
+        // Una vez se ha deslogado el usuario, se elimina la pantalla de inicio y se vuelve a la pantalla de log in
         document.querySelector('section:nth-of-type(1)').classList.toggle('off');
         document.querySelector('section:nth-of-type(2)').classList.toggle('off');
     }).catch((error) => {
