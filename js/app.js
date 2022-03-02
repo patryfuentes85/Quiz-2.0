@@ -83,21 +83,20 @@ const toggleOff = (element) => {
 }
 
 
-//SIGN-UP & LOG-IN MENUS
+//SIGN-UP & LOG-IN FORMS
 const signUpBtn = document.querySelector('#sign-up-btn');
 const signUpForm = document.querySelector('#sign-up-form');
 const logInBtn = document.querySelector('#log-in-btn');
 const logInForm = document.querySelector('#log-in-form');
+const buttons = document.querySelector('.buttons');
 
 signUpBtn.addEventListener('click', () => {
-    signUpBtn.classList.toggle('off');
-    logInBtn.classList.toggle('off');
+    buttons.classList.toggle('off');
     signUpForm.classList.toggle('scaled-form');
 })
 
-logInBtn.addEventListener('click', () => {
-    signUpBtn.classList.toggle('off');
-    logInBtn.classList.toggle('off');  
+logInBtn.addEventListener('click', () => { 
+    buttons.classList.toggle('off');
     logInForm.classList.toggle('scaled-form');
 })
 
