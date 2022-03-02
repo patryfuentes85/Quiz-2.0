@@ -33,11 +33,6 @@ const signUpUser = (email, password) => {
                 id: user.uid,
                 email: user.email,
             });
-
-            // Una vez se ha logado el usuario, se elimina la pantalla de sign in y se revela la pantalla de inicio
-            document.querySelector('section:nth-of-type(1)').classList.toggle('off');
-            document.querySelector('section:nth-of-type(2)').classList.toggle('off');
-
         })
         .catch((error) => {
             let errorCode = error.code;
@@ -53,10 +48,6 @@ const logInUser = (email, password) => {
             let user = userCredential.user;
             console.log(`se ha logado ${user.email} ID:${user.uid}`)
             alert(`se ha logado ${user.email} ID:${user.uid}`)
-
-            // Una vez se ha logado el usuario, se elimina la pantalla de sign in y se revela la pantalla de inicio
-            document.querySelector('section:nth-of-type(1)').classList.toggle('off');
-            document.querySelector('section:nth-of-type(2)').classList.toggle('off');
         })
         .catch((error) => {
             let errorCode = error.code;
@@ -64,8 +55,6 @@ const logInUser = (email, password) => {
             console.log(errorCode)
             console.log(errorMessage)
         })
-
-
 }
 
 // Función para log out
@@ -73,11 +62,6 @@ const logOutUser = () => {
     let user = firebase.auth().currentUser;
     firebase.auth().signOut().then(() => {
         console.log("Sale del sistema: " + user.email)
-
-
-        // Una vez se ha deslogado el usuario, se elimina la pantalla de inicio y se vuelve a la pantalla de log in
-        document.querySelector('section:nth-of-type(1)').classList.toggle('off');
-        document.querySelector('section:nth-of-type(2)').classList.toggle('off');
     }).catch((error) => {
         console.log("hubo un error: " + error);
     });
@@ -92,66 +76,30 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-// *** SIGN UP ***
+// Función para togglear la classe 'off'
+const toggleOff = (element) => {
+    const temporalElement = document.querySelector(`${element}`);
+    temporalElement.classList.toggle('off');
+}
+
+
+//SIGN-UP & LOG-IN MENUS
 const signUpBtn = document.querySelector('#sign-up-btn');
-//Función para crear y redireccionar a la página de registro al clickar el botón SignUp:
-const generateSignUpPage = () => {
-    // La clase off hace "display: none"
-    [...document.querySelectorAll('.buttons')].map(button => button.classList.add('off'));
-    document.querySelector('#title > h1').innerText = 'Sign Up';
-    const form = document.createElement('form');
-    //Se añade el evento al formulario y se le pasa la función 'signUpUser' al final
-    form.onsubmit = function (event) {
-        event.preventDefault();
-        let email = event.target.elements.email.value;
-        let password = event.target.elements.password.value;
-        let password2 = event.target.elements.password2.value;
-        password === password2 ? signUpUser(email, password) : alert("error password");
-    }
-    //Se añaden los campos del formulario para el registro
-    form.classList.add('center-content');
-    form.innerHTML = `<label for='email'>E-mail:</label>
-                      <input type='text' id='email' name='email'>
-                      <label for='password'>Password:</label>
-                      <input type='password' id='password' name='password'>
-                      <label for='password2'>Repeat password:</label>
-                      <input type='password' id='password2' name='password2'>
-                      <button type='submit'>Sign Up</button>`;
-
-    document.querySelector('#title').after(form);
-}
-//Se añade la función al botón correspondiente
-signUpBtn.addEventListener('click', generateSignUpPage);
-
-
-
-//   *** LOG IN ***
+const signUpForm = document.querySelector('#sign-up-form');
 const logInBtn = document.querySelector('#log-in-btn');
-//Función para crear y redireccionar a la página de logeo al clickar el botón LogIn:
-const generateLogInPage = () => {
-    // La clase off hace "display: none"
-    [...document.querySelectorAll('.buttons')].map(button => button.classList.add('off'));
-    document.querySelector('#title > h1').innerText = 'Log In';
-    const form = document.createElement('form');
-    //Se añade el evento al formulario y se le pasa la función 'logInUser' al final
-    form.onsubmit = function (event) {
-        event.preventDefault();
-        let email = event.target.elements.email.value;
-        let password = event.target.elements.password.value;
-        logInUser(email, password)
-    }
-    //Se añaden los campos del formulario para el log in
-    form.classList.add('center-content');
-    form.innerHTML = `<label for='email'>E-mail:</label>
-                      <input type='text' id='email' name='email'>
-                      <label for='password'>Password:</label>
-                      <input type='password' id='password' name='password'>
-                      <button type='submit'>Log In</button>`;
+const logInForm = document.querySelector('#log-in-form');
 
-    document.querySelector('#title').after(form);
-}
-//Se añade la fucnión al botón de log in
-logInBtn.addEventListener('click', generateLogInPage);
+signUpBtn.addEventListener('click', () => {
+    signUpBtn.classList.toggle('off');
+    logInBtn.classList.toggle('off');
+    signUpForm.classList.toggle('scaled-form');
+})
+
+logInBtn.addEventListener('click', () => {
+    signUpBtn.classList.toggle('off');
+    logInBtn.classList.toggle('off');  
+    logInForm.classList.toggle('scaled-form');
+})
 
 
 //PÁGINA DE INICIO

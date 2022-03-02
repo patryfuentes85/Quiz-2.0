@@ -28,7 +28,24 @@ body {
     right: 0;
 }
 
+#welcome-page {
+    position: relative;
+}
 
+/* FORMS */
+#sign-up-form, #log-in-form {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 40%;
+    left: 40%;
+
+    transition: 0.5s ease-in-out;
+}
+.scaled-form {
+    transform: scale(0);
+}
 .center-content {
     display: flex;
     flex-direction: column;
