@@ -10,67 +10,6 @@
 </head>
 
 <body>
-
-    <!-- Esta sección está en 'display: none' hasta que se haga el log in -->
-    <section class="start-page center-content off">
-        <button type="button" id="log-out-btn">Log Out</button>
-        <div class="statistics">
-            <p>Aquí irán las estadísiticas generales del usuario.</p>
-        </div>
-        <a href="./pages/quiz.html">New Game</a>
-    </section>
-    <!-- Está sección es visible hasta que se hace el log in, y luego desaparece -->
-    <section class="welcome-page center-content">
-        
-        <div id="title">
-            <h1>Title</h1>
-        </div>
-
-        <div class="buttons center-content">
-            <button id="sign-up-btn">Sign Up</button>
-            <button id="log-in-btn">Log In</button>
-        </div>
-
-
-        <!-- Estos forms están escaladas hasta que se pulsa el botón -->
-        <form action="" class="scaled-form" id="sign-up-form">
-            <h2>Sign Up</h2>
-            <label for="sign-up-name">Name:</label>
-            <input type="text" name="sign-up-name" id="sign-up-name">
-
-            <label for="sign-up-email">Email:</label>
-            <input type="text" name="sign-up-email" id="sign-up-email">
-
-            <label for="sign-up-password">password:</label>
-            <input type="sign-up-password" name="sign-up-password" id="sign-up-password">
-
-            <input type="submit" value="Sign Up" id="sign-up-button">
-        </form>
-
-
-        <form action="" class="scaled-form" id="log-in-form">
-            <h2>Log In</h2>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
-
-            <label for="email">Email:</label>
-            <input type="text" name="email" id="email">
-
-            <label for="password">password:</label>
-            <input type="password" name="password" id="password">
-
-            <input type="submit" value="Log In" id="log-in-button">
-        </form>
-
-    </section>
-
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    </script>
-    <script src="./js/app.js"></script>
 </body>
 
 </html>
