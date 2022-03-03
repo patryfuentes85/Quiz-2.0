@@ -5,9 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    
     <title>Quiz 2.0</title>
 </head>
 <body>
-    <script src="../js/app.js"></script>
+   <form id="question_form" action="">
+    <span id="question-number"></span>
+    
+    <h2></h2>
+
+    <label for="answer1"></label>
+    <input type="radio" name="answerField" id="answer1" class="inputClass">
+    
+    <label for="answer2"></label>
+    <input type="radio" name="answerField" id="answer2" class="inputClass">
+    
+    <label for="answer3"></label>
+    <input type="radio" name="answerField" id="answer3" class="inputClass">
+    
+    <label for="answer4"></label>
+    <input type="radio" name="answerField" id="answer4" class="inputClass">
+    
+    <input type='submit' value='Next' id='next-button' name='next-button'>
+    
+    </form>
+
+    <script src="../js/quiz.js"></script>
+   
 </body>
 </html>
