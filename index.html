@@ -10,7 +10,74 @@
 </head>
 
 <body>
+    <header>
+        <h1 id="title">Title</h1>
+    </header>
 
+    <main>
+        <!-- Launch section: this is what the page loads when you access -->
+        <section class="index-sections" id="index-launch-page-section">
+
+            <button type="button" class="index-buttons" id="sign-up-btn">Sign Up</button>
+            <button type="button" class="index-buttons" id="log-in-btn">Log In</button>
+
+        </section>
+
+        <!-- Sign up formulary -->
+        <section class="index-sections off" id="index-sign-up-page-section">
+
+            <form action="" id="sign-up-form">
+
+                <label for="signUpName">Name:</label>
+                <input type="text" name="signUpName" id="signUpName">
+
+                <label for="signUpEmail">E-mail:</label>
+                <input type="text" name="signUpEmail" id="signUpEmail">
+
+                <label for="signUpPassword">Password:</label>
+                <input type="password" name="signUpPassword" id="signUpPassword">
+
+                <label for="signUpPassword2">Repeat password:</label>
+                <input type="password" name="signUpPassword2" id="signUpPassword2">
+
+                <input type="submit" class="index-buttons" id="sign-up-send-btn" value="Send">
+
+            </form>
+
+        </section>
+
+        <!-- Log in formulary -->
+        <section class="index-sections off" id="index-log-in-page-section">
+
+            <form action="" id="log-in-form">
+
+                <label for="logInEmail">E-mail:</label>
+                <input type="text" name="logInEmail" id="logInEmail">
+
+                <label for="logInPassword">Password:</label>
+                <input type="password" name="logInPassword" id="logInPassword">
+
+                <input type="submit" class="index-buttons" id="log-in-send-btn" value="Send">
+
+            </form>
+
+        </section>
+
+        <!-- Welcome page after user signs up or logs in -->
+        <section class="index-sections off" id="index-welcome-page-section">
+            <h2 id="user-name"></h2>
+            <button class="index-buttons" id="my-profile-btn">My Profile</button>
+            <button class="index-buttons" id="new-game-btn">New Game</button>
+            <button class="index-buttons" id="log-out-btn">Log Out</button>
+        </section>
+
+        <section class="index-sections off" id="index-my-profile-page-section">
+
+        </section>
+
+    </main>
+
+    
     <script src="./js/index.js" type="module"></script>
 </body>
 

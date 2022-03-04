@@ -23,37 +23,8 @@ let signUpProcess = false;
 let logInProcess = false;
 let userLogged = false;
 
-// *** GLOBAL PAGE VARIABLES ***:
-// Theese are DOM elements common to every created "page" in the index.html, so they are declared once in order to save time and resources.
-const header = document.createElement('header');
-document.body.appendChild(header);
-
-const title = document.createElement('h1');
-header.appendChild(title);
-
-const main = document.createElement('main');
-document.body.appendChild(main);
-
-
 
 // *** GLOBAL FIREBASE FUNCTIONS ***:
-// Create User Function with custom ID and uid from authentication:
-
-// Sign Up function with email:
-const signUp = (auth, signUpEmail, signUpPassword) => {
-    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-        .then(userCredential => {
-            const user = userCredential.user;
-            const userUid = user.uid;
-            console.log('Usuario autenticado: ' + signUpEmail)
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage)
-        })
-};
 
 // Log In Function with email:
 const logIn = (auth, logInEmail, logInPassword) => {
@@ -70,6 +41,14 @@ const logIn = (auth, logInEmail, logInPassword) => {
         })
 };
 
+// Create user Function in Firestore
+const createUser = (db, collection, signUpEmail, signUpName) => {
+    setDoc(doc(db, collection, signUpName), {
+        name: signUpName,
+        email: signUpEmail
+    })
+}
+
 // Log Out Function:
 const logOut = () => {
     auth.signOut()
@@ -77,9 +56,10 @@ const logOut = () => {
         .catch(error => {
             console.log(error)
         })
-    
-    launchPage()
-    document.querySelector('#log-out-btn').remove()
+    document.querySelector('#index-welcome-page-section').classList.toggle('off');
+    document.querySelector('#index-launch-page-section').classList.toggle('off');
+    document.querySelector('#title').innerText = 'Title';
+
 }
 
 // Log In Observer Function:
@@ -95,125 +75,89 @@ const isUserLogged = () => {
     })
 }
 
-// *** DOM FUNCTIONS ***
-const createLogOutBtn = () => {
-    const logOutBtn = document.createElement('button');
-    logOutBtn.innerText = 'Log Out';
-    logOutBtn.setAttribute('id', 'log-out-btn');
-    logOutBtn.addEventListener('click', logOut);
-
-    document.body.appendChild(logOutBtn);
+// *** GLOBAL FUNCTIONS ***
+// Fech DOM element function:
+const domElement = (element) => {
+    const retrievedElement = document.querySelector(`${element}`);
+    return retrievedElement
 }
 
-// *** PAGES ***
-// Each of theese functions create a "page" with HTML elements
+// CALL FUNCTIONS:
+//Log out button event:
+domElement('#log-out-btn').addEventListener('click', () => {
+    logOut();
+})
+// Logged user observer event:
+isUserLogged();
 
-const launchPage = () => {
 
-    // Activate logged user observer:
-    isUserLogged()
-    
+//Launch page:
+domElement('#sign-up-btn').addEventListener('click', () => {
+    domElement('#index-launch-page-section').classList.toggle('off');
+    domElement('#index-sign-up-page-section').classList.toggle('off');
+    domElement('#title').innerText = 'Sign Up';
+})
+domElement('#log-in-btn').addEventListener('click', () => {
+    domElement('#index-launch-page-section').classList.toggle('off');
+    domElement('#index-log-in-page-section').classList.toggle('off');
+    domElement('#title').innerText = 'Log In';
+})
 
-    title.innerText = 'Welcom to Quiz!';
+//Sign Up Formulary event:
+domElement('#sign-up-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    // Sign Up button is created and and event added to redirect to the form
-    const signUpBtn = document.createElement('button');
-    signUpBtn.classList.add('sign-buttons');
-    signUpBtn.innerText = 'Sign Up';
-    main.appendChild(signUpBtn);
-    signUpBtn.addEventListener('click', () => {
-        signUpProcess = true;
-        formPage(); // It goes to the formulary
-    })
-    document.body.appendChild(signUpBtn)
+    const signUpName = event.target.signUpName.value;
+    const signUpEmail = event.target.signUpEmail.value;
+    const signUpPassword = event.target.signUpPassword.value;
+    const signUpPassword2 = event.target.signUpPassword2.value;
+    const usersRef = collection(db, "users");
 
-    // Log In button is created and and event added to redirect to the formulary
-    const logInBtn = document.createElement('button');
-    logInBtn.classList.add('sign-buttons');
-    logInBtn.innerText = 'Log In';
-    document.body.appendChild(logInBtn);
-    logInBtn.addEventListener('click', () => {
-        logInProcess = true;
-        formPage(); // It goes to the formulary
-    })
+    if (signUpPassword === signUpPassword2 /* aquí los regex*/) {
+        try {
+            // Sign Up Process
+            await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+                .then((userCredential) => {
+                    console.log('User registered')
+                })
 
-    // Remove all previous unnecessary elements, but after the buttons have alredy been created:
-    const possibleRemovables = main.childNodes;
-    if (possibleRemovables.length > 0) {possibleRemovables.forEach(item => item.remove())}
-}
+            //Create document in Firestore
+            await setDoc(doc(usersRef, signUpEmail), {
+                username: signUpName,
+                email: signUpEmail
+            })
+        }
+        catch (error) {
+            console.log('Error: ', error)
+        }
 
-const formPage = () => {
-    createForm()
-}
-
-const createForm = () => {
-    // We have to clear up unneeded buttons:
-    document.querySelectorAll('.sign-buttons').forEach(button => button.remove())
-    // Creates a standard formulary
-    const form = document.createElement('form');
-    form.innerHTML = `
-                      <label for="name"class="removable">Name:</label>
-                      <input type="text" class="removable" id="name"</input>   
-
-                      <label for="email">E-mail:</label>
-                      <input type="text" id="email"</input>
-                      
-                      <label for="password">Password:</label>
-                      <input type="password" id="password"</input>
-                      
-                      <label for="password2" class="removable">Repeat password:</label>
-                      <input type="password" class="removable" id="password2"</input>
-                      
-                      <button class="sign-buttons">Send</button>`;
-    main.appendChild(form);
-
-    // If user is signing up, the event calls signUp() function to authenticate and create new user in Firestore
-    if (signUpProcess) {
-        // Form event        
-        form.addEventListener('submit', (event) => {
-            event.preventDefault()
-            const name = event.target.name.value;
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            const password2 = event.target.password2.value;
-            if (password === password2) {
-                signUp(auth, email, password);
-                form.reset();
-                setDoc(doc(db, 'users', email), {
-                    name: name,
-                    email: email
-                });
-                signUpProcess = false;
-                welcomePage();
-            }
-            else {
-                console.log('Email or password are invalid.');
-            }
-        })
+        domElement('#index-sign-up-page-section').classList.toggle('off');
+        domElement('#index-welcome-page-section').classList.toggle('off');
+        domElement('#title').innerText = 'Welcome';
     }
     else {
-        //Removes unnecessary form elements:
-        document.querySelectorAll('.removable').forEach(element => element.remove())
-        // Form event
-        form.addEventListener('submit', (event) => {
-            event.preventDefault()
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            logIn(auth, email, password);
-            form.reset()
-            logInProcess = false;
-            welcomePage();
-        })
+        console.log('Incorrect e-mail or password');
     }
-}
+})
 
-const welcomePage = () => {
-    console.log('Parece que todo ha ido bien...');
-    createLogOutBtn()
-}
+//Log in formulary event:
+domElement('#log-in-form').addEventListener('submit', (event) => {
+    event.preventDefault();
 
+    const logInEmail = event.target.logInEmail.value;
+    const logInPassword = event.target.logInPassword.value;
 
-// Now we call the launchPage() function at the beginning and the process develops itself automatically
-launchPage()
-// PENDIENTE
-// 1) lograr meter el nombre en db; igual hay que crear el usuario y luego actualizarlo con el nombre.
+    logIn(auth, logInEmail, logInPassword);
+
+    domElement('#index-log-in-page-section').classList.toggle('off');
+    domElement('#index-welcome-page-section').classList.toggle('off');
+    domElement('#title').innerText = 'Welcome';
+})
+
+//My profile page event:
+domElement('#my-profile-btn').addEventListener('click', () => {
+    domElement('#index-welcome-page-section').classList.toggle('off');
+    domElement('#index-my-profile-page-section').classList.toggle('off');
+    domElement('#title').innerText = 'My Profile';
+
+})
