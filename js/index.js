@@ -134,6 +134,7 @@ domElement('#sign-up-form').addEventListener('submit', async (event) => {
         domElement('#index-sign-up-page-section').classList.toggle('off');
         domElement('#index-welcome-page-section').classList.toggle('off');
         domElement('#title').innerText = 'Welcome';
+        domElement('#sign-up-form').reset();
     }
     else {
         console.log('Incorrect e-mail or password');
@@ -152,6 +153,7 @@ domElement('#log-in-form').addEventListener('submit', (event) => {
     domElement('#index-log-in-page-section').classList.toggle('off');
     domElement('#index-welcome-page-section').classList.toggle('off');
     domElement('#title').innerText = 'Welcome';
+    domElement('#log-in-form').reset();
 })
 
 //My profile page event:
