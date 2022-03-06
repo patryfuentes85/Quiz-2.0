@@ -1,12 +1,100 @@
+// *** FIREBASE SETUP ***:
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, deleteUser, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDA3yVi5k-EuRIZJhvRonfFrR2fia0c_Pg",
+    authDomain: "quiz-11126.firebaseapp.com",
+    projectId: "quiz-11126",
+    storageBucket: "quiz-11126.appspot.com",
+    messagingSenderId: "974421179858",
+    appId: "1:974421179858:web:9f2a811ae0e470cb32dc0b"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth();
+
+// Logged user observer:
+const isUserLogged = () => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            console.log('Logged user: ' + user.displayName);
+            userLogged = true;
+            userId = user.email;
+            userName = user.displayName;
+
+        } else {
+            console.log('No logged user');
+            userLogged = false;
+            userId = undefined;
+            userName = undefined;
+        }
+    })
+}
+
+// Get results to create the user statistics page
+const getResults = async (db, collection, docId) => {
+    const docRef = doc(db, collection, docId);
+    const data = await getDoc(docRef);
+    const results = data.data().results;
+    return results
+}
+
+// Create results page function:
+const form = document.querySelector('#question_form');
+const resultsPage = document.querySelector('#quiz-results-page');
+
+const goToResults = async () => {
+    form.classList.toggle('off');
+    resultsPage.classList.toggle('off');
+    const correct = results.correct;
+    const incorrect = results.incorrect;
+    const data = {
+        datasets: [{
+            label: 'Results',
+            data: [correct, incorrect],
+            backgroundColor: [
+                'rgb(0, 128, 0)',
+                'rgb(255, 0, 0)'
+                
+            ]
+        }],
+        labels: [
+            'Correct',
+            'Incorrect'
+        ]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {}
+    };
+    resultsChart = new Chart(
+        document.getElementById('results-chart'),
+        config
+      );
+}
+
+////////////////
+
+let userLogged = false;
+let userId = undefined;
+let userName = undefined;
+
 let questions = [];
 let correctAnswers = [];
 let count = 0;
-let results = { correct: 0,
+let results = {
+                correct: 0,
                 incorrect: 0,
                 date: undefined
-              };
+};
+
+let resultsChart = undefined;
 
 
+isUserLogged()
 
 const function1 = async function getQuestions() {
     let response = await fetch(`https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple`);
@@ -32,7 +120,7 @@ const function2 = async function test() {
     h2.innerText = `${questions[count].question}`;
 
     const span = document.querySelector('#question-number');
-    span.innerText = `Question Number: ${count+1}`
+    span.innerText = `Question Number: ${count + 1}`
 
     const inputs = document.querySelectorAll('.inputClass');
     inputs.forEach((item, index) => {
@@ -87,7 +175,6 @@ function unselect() {
     radio.forEach((x) => x.checked = false);
 };
 
-const form = document.querySelector('form');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -103,8 +190,16 @@ form.addEventListener('submit', (event) => {
         results.date = getDate();
         console.log('Se acabó!')
         console.log(results);
+        updateDoc(doc(db, 'users', userId), {
+            results: arrayUnion(results)
+        })
+        goToResults()
         // fin del juego 
     }
-
-
 });
+
+const newGameBtn = document.querySelector('#new-game-btn');
+newGameBtn.addEventListener('click', () => {
+    resultsChart.destroy()
+    location.reload();
+})

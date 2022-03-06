@@ -196,6 +196,7 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
     }
 })
 
+
 //My profile page event:
 // Chart is declared "undefined" beacuse we need to declare it in the global scope in order to be able to destroy it anytime,
 // but we can't actualize it right now, or the chart would be displayed before having the data. 
