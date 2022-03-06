@@ -15,11 +15,14 @@
     </header>
 
     <main>
+
         <!-- Launch section: this is what the page loads when you access -->
         <section class="index-sections" id="index-launch-page-section">
 
             <button type="button" class="index-buttons" id="sign-up-btn">Sign Up</button>
             <button type="button" class="index-buttons" id="log-in-btn">Log In</button>
+
+            <button type="button" class="index-buttons" id="sign-up-google-btn">Sign Up Google</button>
 
         </section>
 
@@ -65,19 +68,51 @@
 
         <!-- Welcome page after user signs up or logs in -->
         <section class="index-sections off" id="index-welcome-page-section">
+            <button class="index-buttons" id="log-out-btn">Log Out</button>
+
             <h2 id="user-name"></h2>
+
             <button class="index-buttons" id="my-profile-btn">My Profile</button>
             <button class="index-buttons" id="new-game-btn">New Game</button>
-            <button class="index-buttons" id="log-out-btn">Log Out</button>
+
+
+            <form action="" id="update-form">
+                <label for="update-results">Update results:</label>
+                <input type="text" name="update-results" id="update-results">
+                <input type="submit" value="Update">
+            </form>
+
+            <button type="button" id="get-doc">Get doc</button>
+
         </section>
 
         <section class="index-sections off" id="index-my-profile-page-section">
 
+            <button class="index-buttons" id="back-my-profile-btn">Back</button>
+            <div id="graphics-container">
+                <h3 id="graphics-title">Your stats:</h3>
+                <div id="graphics-div">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+            <div id="settings-container">
+                <h3>Settings:</h3>
+                <form action="" id="update-name-form">
+                    <label for="update-name">Change Name:</label>
+                    <input type="text" name="update-name" id="update-name">
+                    <input type="submit" class="index-buttons" value="Change">
+                </form>
+
+                <button type="button" class="index-buttons" id="reset-stats">Reset stats</button>
+
+                <button type="button" class="index-buttons" id="delete-account">Delete account</button>
+            </div>
         </section>
 
     </main>
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/index.js" type="module"></script>
 </body>
 
