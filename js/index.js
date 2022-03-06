@@ -1,3 +1,4 @@
+
 // I declare all the functions and variables first, and then I start to execute them in order to create the diferent "pages"
 // that will be displayed to the user as he/she proceeds with the authentication / login process.
 
@@ -321,3 +322,4 @@ domElement('#update-form').addEventListener('submit', (event) => {
     });
 
 })
+
