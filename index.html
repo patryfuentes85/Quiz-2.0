@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,22 +8,112 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Quiz 2.0 Home</title>
 </head>
-<body>
 
+<body>
     <header>
-        <h1>Quiz</h1>
-        <p>Play Time !!</p>
+        <h1 id="title">Title</h1>
     </header>
-    <div class="bigBox">
-        <section id="question1">
+
+    <main>
+
+        <!-- Launch section: this is what the page loads when you access -->
+        <section class="index-sections" id="index-launch-page-section">
+
+            <button type="button" class="index-buttons" id="sign-up-btn">Sign Up</button>
+            <button type="button" class="index-buttons" id="log-in-btn">Log In</button>
+
+            <button type="button" class="index-buttons" id="sign-up-google-btn">Sign Up Google</button>
 
         </section>
-    </div>
+
+        <!-- Sign up formulary -->
+        <section class="index-sections off" id="index-sign-up-page-section">
+
+            <form action="" id="sign-up-form">
+
+                <label for="signUpName">Name:</label>
+                <input type="text" name="signUpName" id="signUpName">
+
+                <label for="signUpEmail">E-mail:</label>
+                <input type="text" name="signUpEmail" id="signUpEmail">
+
+                <label for="signUpPassword">Password:</label>
+                <input type="password" name="signUpPassword" id="signUpPassword">
+
+                <label for="signUpPassword2">Repeat password:</label>
+                <input type="password" name="signUpPassword2" id="signUpPassword2">
+
+                <input type="submit" class="index-buttons" id="sign-up-send-btn" value="Send">
+
+            </form>
+
+        </section>
+
+        <!-- Log in formulary -->
+        <section class="index-sections off" id="index-log-in-page-section">
+
+            <form action="" id="log-in-form">
+
+                <label for="logInEmail">E-mail:</label>
+                <input type="text" name="logInEmail" id="logInEmail">
+
+                <label for="logInPassword">Password:</label>
+                <input type="password" name="logInPassword" id="logInPassword">
+
+                <input type="submit" class="index-buttons" id="log-in-send-btn" value="Send">
+
+            </form>
+
+        </section>
+
+        <!-- Welcome page after user signs up or logs in -->
+        <section class="index-sections off" id="index-welcome-page-section">
+            <button class="index-buttons" id="log-out-btn">Log Out</button>
+
+            <h2 id="user-name"></h2>
+
+            <button class="index-buttons" id="my-profile-btn">My Profile</button>
+            <button class="index-buttons" id="new-game-btn">New Game</button>
 
 
+            <form action="" id="update-form">
+                <label for="update-results">Update results:</label>
+                <input type="text" name="update-results" id="update-results">
+                <input type="submit" value="Update">
+            </form>
 
+            <button type="button" id="get-doc">Get doc</button>
 
+        </section>
 
-    <script src="./js/app.js"></script>
+        <section class="index-sections off" id="index-my-profile-page-section">
+
+            <button class="index-buttons" id="back-my-profile-btn">Back</button>
+            <div id="graphics-container">
+                <h3 id="graphics-title">Your stats:</h3>
+                <div id="graphics-div">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+            <div id="settings-container">
+                <h3>Settings:</h3>
+                <form action="" id="update-name-form">
+                    <label for="update-name">Change Name:</label>
+                    <input type="text" name="update-name" id="update-name">
+                    <input type="submit" class="index-buttons" value="Change">
+                </form>
+
+                <button type="button" class="index-buttons" id="reset-stats">Reset stats</button>
+
+                <button type="button" class="index-buttons" id="delete-account">Delete account</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/index.js" type="module"></script>
 </body>
+
 </html>
