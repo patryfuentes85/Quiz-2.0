@@ -70,7 +70,7 @@ const function2 = async function test() {
     })
 
     const h2 = document.querySelector('h2');
-    h2.innerText = `${questions[count].question}`;
+    h2.innerHTML = `${questions[count].question}`;
 
     const span = document.querySelector('#question-number');
     span.innerText = `Question Number: ${count + 1}`
@@ -82,7 +82,7 @@ const function2 = async function test() {
 
     const labels = document.querySelectorAll('label');
     labels.forEach((item, index) => {
-        item.innerText = `${randomAnswers[count][index]}`;
+        item.innerHTML = `${randomAnswers[count][index]}`;
     })
     count++;
 
