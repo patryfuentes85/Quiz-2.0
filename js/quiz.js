@@ -51,7 +51,7 @@ const isUserLogged = () => {
 isUserLogged()
 
 const function1 = async function getQuestions() {
-    let response = await fetch(`https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple`);
+    let response = await fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`);
     let data = await response.json();
     let final = await data.results.map((item, index) => {
         questions.push({
@@ -59,8 +59,21 @@ const function1 = async function getQuestions() {
             'correct_answer': item.correct_answer,
             'incorrect_answers': item.incorrect_answers
         });
-        correctAnswers.push(item.correct_answer);
     });
+    let response2 = await fetch(`https://api.trivia.willfry.co.uk/questions?categories=general_knowledge&limit=5`);
+    let data2 = await response2.json();
+    let final2 = await data2.map(item => {
+        questions.push({
+            'question': item.question,
+            'correct_answer': item.correctAnswer,
+            'incorrect_answers': item.incorrectAnswers.slice(0, 3)
+        });
+    })
+    questions.sort(() => 0.5 - Math.random());
+    questions.forEach(question => {
+        correctAnswers.push(question.correct_answer)
+    });
+    
 }
 
 const function2 = async function test() {
@@ -68,7 +81,9 @@ const function2 = async function test() {
     let randomAnswers = questions.map((quest, index) => {
         return [...questions[index].incorrect_answers, questions[index].correct_answer].sort(() => 0.5 - Math.random())
     })
-
+    
+    console.log(questions);
+    console.log(correctAnswers);
     const h2 = document.querySelector('h2');
     h2.innerHTML = `${questions[count].question}`;
 
@@ -102,8 +117,8 @@ const getDate = () => {
     const day = newDate.getDate() >= 10 ? newDate.getDate() : `0${newDate.getDate()}`;
     const month = newDate.getMonth() >= 10 ? newDate.getMonth() : `0${newDate.getMonth()}`;
     const year = newDate.getFullYear();
-    const hour = newDate.getHours() >= 10 ? newDate.getHours() : `0${date.getHours()}`;
-    const minutes = newDate.getMinutes() >= 10 ? newDate.getMinutes() : `0${date.getMinutes()}`;
+    const hour = newDate.getHours() >= 10 ? newDate.getHours() : `0${newDate.getHours()}`;
+    const minutes = newDate.getMinutes() >= 10 ? newDate.getMinutes() : `0${newDate.getMinutes()}`;
     const fullDate = `${day}/${month}/${year} - ${hour}:${minutes}`;
     return fullDate
 }
