@@ -15,6 +15,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
+
 // Logged user observer:
 const isUserLogged = async () => {
     auth.onAuthStateChanged((user) => {
@@ -23,6 +24,8 @@ const isUserLogged = async () => {
             userLogged = true;
             userId = user.email;
             userName = user.displayName;
+            getResults(user.email)
+                .then(results => getChart(results))
 
         } else {
             console.log('No logged user');
@@ -34,8 +37,8 @@ const isUserLogged = async () => {
 }
 
 // Get results to create the user statistics page
-const getResults = async () => {
-    const docRef = await doc(db, 'users', 'daniel@daniel.com');
+const getResults = async (userId) => {
+    const docRef = await doc(db, 'users', userId);
     const data = await getDoc(docRef);
     const results = await data.data().results;
     console.log(results)
@@ -78,10 +81,7 @@ let userId = undefined;
 let userName = undefined;
 let resultsChart = undefined;
 
-
-asyncLauncher();
-
-
+isUserLogged()
 
 const newGameBtn = document.querySelector('#new-game-btn');
 newGameBtn.addEventListener('click', () => {
@@ -89,6 +89,6 @@ newGameBtn.addEventListener('click', () => {
 })
 
 const menuBtn = document.querySelector('#menu-btn');
-myProfileBtn.addEventListener('click', () => {
+menuBtn.addEventListener('click', () => {
     window.location.href = "../index.html";
 })

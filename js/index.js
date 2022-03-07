@@ -57,7 +57,8 @@ const isUserLogged = () => {
             userName = user.displayName;
             domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-welcome-page-section').classList.toggle('off');
-        }
+            domElement('#title').innerText = `Welcome ${userName}`;
+                }
         else {
             console.log('No logged user');
             userLogged = false;
@@ -128,8 +129,9 @@ domElement('#sign-up-form').addEventListener('submit', async (event) => {
                 email: signUpEmail,
                 results: []
             })
+            domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-sign-up-page-section').classList.toggle('off');
-            domElement('#index-welcome-page-section').classList.toggle('off');
+            // domElement('#index-welcome-page-section').classList.toggle('off');
             domElement('#title').innerText = `Welcome ${auth.currentUser.displayName}`;
             domElement('#sign-up-form').reset();
         }
@@ -163,8 +165,8 @@ domElement('#sign-up-google-btn').addEventListener('click', () => {
                 });
         })
         .then(() => {
-            domElement('#index-launch-page-section').classList.toggle('off');
-            domElement('#index-welcome-page-section').classList.toggle('off');
+            // domElement('#index-launch-page-section').classList.toggle('off');
+            // domElement('#index-welcome-page-section').classList.toggle('off');
             domElement('#title').innerText = `Welcome ${userName.split(' ')[0]}`;
         })
         .catch((error) => {
@@ -299,35 +301,5 @@ domElement('#back-my-profile-btn').addEventListener('click', () => {
     domElement('#index-welcome-page-section').classList.toggle('off');
     domElement('#index-my-profile-page-section').classList.toggle('off');
     domElement('#title').innerText = `Welcome ${userName}`;
-})
-
-
-
-
-
-// THIS IS FOR THE QUIZ.HTML PAGE
-// Get date:
-const getDate = () => {
-    const date = new Date();
-    const date2 = `0${date.getDate()}/0${date.getMonth()}/${date.getFullYear()}`;
-    const time = `${date.getHours()}:${date.getMinutes()}`;
-    return [date2, time].join(' ')
-}
-
-
-//Update results:
-domElement('#update-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const data = event.target['update-results'].value;
-    const docRef = doc(db, 'users', userId);
-    updateDoc(docRef, {
-        results: arrayUnion({
-            date: getDate(),
-            correct: data,
-            incorrect: data + 5
-        })
-    });
-
 })
 
