@@ -70,7 +70,7 @@ const function2 = async function test() {
     })
 
     const h2 = document.querySelector('h2');
-    h2.innerText = `${questions[count].question}`;
+    h2.innerHTML = `${questions[count].question}`;
 
     const span = document.querySelector('#question-number');
     span.innerText = `Question Number: ${count + 1}`
@@ -82,7 +82,7 @@ const function2 = async function test() {
 
     const labels = document.querySelectorAll('label');
     labels.forEach((item, index) => {
-        item.innerText = `${randomAnswers[count][index]}`;
+        item.innerHTML = `${randomAnswers[count][index]}`;
     })
     count++;
 
@@ -98,10 +98,14 @@ mother()
 console.log(correctAnswers);
 
 const getDate = () => {
-    const date = new Date();
-    const date2 = `0${date.getDate()}/0${date.getMonth()}/${date.getFullYear()}`;
-    const time = `${date.getHours()}:${date.getMinutes()}`;
-    return [date2, time].join(' ')
+    const newDate = new Date();
+    const day = newDate.getDate() >= 10 ? newDate.getDate() : `0${newDate.getDate()}`;
+    const month = newDate.getMonth() >= 10 ? newDate.getMonth() : `0${newDate.getMonth()}`;
+    const year = newDate.getFullYear();
+    const hour = newDate.getHours() >= 10 ? newDate.getHours() : `0${date.getHours()}`;
+    const minutes = newDate.getMinutes() >= 10 ? newDate.getMinutes() : `0${date.getMinutes()}`;
+    const fullDate = `${day}/${month}/${year} - ${hour}:${minutes}`;
+    return fullDate
 }
 
 const validation = event => {
