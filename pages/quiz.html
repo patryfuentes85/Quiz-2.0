@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,37 +8,35 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>Quiz 2.0</title>
 </head>
+
 <body>
 
-    <form id="question_form" action="">
-    <span id="question-number"></span>
-    
-    <h2 id="textQ"></h2>
+    <form class="" id="question_form" action="">
+        <span id="question-number"></span>
 
-    <label for="answer1"></label>
-    <input type="radio" name="answerField" id="answer1" class="inputClass" required>
-    
-    <label for="answer2"></label>
-    <input type="radio" name="answerField" id="answer2" class="inputClass">
-    
-    <label for="answer3"></label>
-    <input type="radio" name="answerField" id="answer3" class="inputClass">
-    
-    <label for="answer4"></label>
-    <input type="radio" name="answerField" id="answer4" class="inputClass">
-    
-    <input type='submit' value='Next' id='next-button' name='next-button'>
-    
+        <h2 id="textQ"></h2>
+
+        <label for="answer1"></label>
+        <input type="radio" name="answerField" id="answer1" class="inputClass" required>
+
+        <label for="answer2"></label>
+        <input type="radio" name="answerField" id="answer2" class="inputClass">
+
+        <label for="answer3"></label>
+        <input type="radio" name="answerField" id="answer3" class="inputClass">
+
+        <label for="answer4"></label>
+        <input type="radio" name="answerField" id="answer4" class="inputClass">
+
+        <input type='submit' value='Next' id='next-button' name='next-button'>
+
     </form>
 
     <img id="quest" src="../assets/5f511cefd8bf3900040fd61a.png" alt="questionSymbol">
-    
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    <script src="../js/quiz.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/quiz.js" type="module"></script>
 
 </body>
+
 </html>

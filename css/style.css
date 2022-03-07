@@ -1,7 +1,5 @@
 
-.off {
-    display: none;
-}
+
 body {
     background-image: url(../assets/abstractblue.jpeg);
     background-size: cover;
@@ -91,6 +89,10 @@ form > label:hover{
     top: 81%;
     left: 62%;
     width: 100px;
+}
+
+.off {
+    display: none;
 }
 
 /* @media (max-width: 768px) {

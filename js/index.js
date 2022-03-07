@@ -28,6 +28,7 @@ let userId = undefined;
 let userName = undefined;
 
 
+
 // *** GLOBAL FUNCTIONS ***
 // Log Out Function:
 const logOut = () => {
@@ -42,6 +43,10 @@ const logOut = () => {
 
 }
 
+
+const test = async () => {
+    console.log('second process')
+}
 // Log In Observer Function:
 const isUserLogged = () => {
     auth.onAuthStateChanged((user) => {
@@ -50,13 +55,17 @@ const isUserLogged = () => {
             userLogged = true;
             userId = user.email;
             userName = user.displayName;
-
-        } else {
+            domElement('#index-launch-page-section').classList.toggle('off');
+            domElement('#index-welcome-page-section').classList.toggle('off');
+            domElement('#title').innerText = `Welcome ${userName}`;
+                }
+        else {
             console.log('No logged user');
             userLogged = false;
             userId = undefined;
             userName = undefined;
         }
+
     })
 }
 
@@ -74,14 +83,12 @@ const domElement = (element) => {
     return retrievedElement
 }
 
-
-
 //Log out button event:
 domElement('#log-out-btn').addEventListener('click', () => {
     logOut();
 })
-// Logged user observer event:
-isUserLogged();
+
+isUserLogged()
 
 
 //Launch page:
@@ -122,8 +129,9 @@ domElement('#sign-up-form').addEventListener('submit', async (event) => {
                 email: signUpEmail,
                 results: []
             })
+            domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-sign-up-page-section').classList.toggle('off');
-            domElement('#index-welcome-page-section').classList.toggle('off');
+            // domElement('#index-welcome-page-section').classList.toggle('off');
             domElement('#title').innerText = `Welcome ${auth.currentUser.displayName}`;
             domElement('#sign-up-form').reset();
         }
@@ -157,8 +165,8 @@ domElement('#sign-up-google-btn').addEventListener('click', () => {
                 });
         })
         .then(() => {
-            domElement('#index-launch-page-section').classList.toggle('off');
-            domElement('#index-welcome-page-section').classList.toggle('off');
+            // domElement('#index-launch-page-section').classList.toggle('off');
+            // domElement('#index-welcome-page-section').classList.toggle('off');
             domElement('#title').innerText = `Welcome ${userName.split(' ')[0]}`;
         })
         .catch((error) => {
@@ -183,8 +191,9 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
                 console.log('Usuario logado: ' + user.displayName);
             })
         domElement('#index-log-in-page-section').classList.toggle('off');
-        domElement('#index-welcome-page-section').classList.toggle('off');
-        domElement('#title').innerText = `Welcome ${userName}`; // ${auth.currentUser.displayName}
+        domElement('#index-launch-page-section').classList.toggle('off');
+        // domElement('#index-welcome-page-section').classList.toggle('off');
+        // domElement('#title').innerText = `Welcome ${userName}`; // ${auth.currentUser.displayName}
         domElement('#log-in-form').reset();
     }
     catch (error) {
@@ -195,6 +204,7 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
         alert('Incorrect user or password')
     }
 })
+
 
 //My profile page event:
 // Chart is declared "undefined" beacuse we need to declare it in the global scope in order to be able to destroy it anytime,
@@ -291,35 +301,5 @@ domElement('#back-my-profile-btn').addEventListener('click', () => {
     domElement('#index-welcome-page-section').classList.toggle('off');
     domElement('#index-my-profile-page-section').classList.toggle('off');
     domElement('#title').innerText = `Welcome ${userName}`;
-})
-
-
-
-
-
-// THIS IS FOR THE QUIZ.HTML PAGE
-// Get date:
-const getDate = () => {
-    const date = new Date();
-    const date2 = `0${date.getDate()}/0${date.getMonth()}/${date.getFullYear()}`;
-    const time = `${date.getHours()}:${date.getMinutes()}`;
-    return [date2, time].join(' ')
-}
-
-
-//Update results:
-domElement('#update-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const data = event.target['update-results'].value;
-    const docRef = doc(db, 'users', userId);
-    updateDoc(docRef, {
-        results: arrayUnion({
-            date: getDate(),
-            correct: data,
-            incorrect: data + 5
-        })
-    });
-
 })
 
