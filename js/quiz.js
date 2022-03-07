@@ -15,6 +15,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
+////////////////
+
+let userLogged = false;
+let userId = undefined;
+let userName = undefined;
+
+let questions = [];
+let correctAnswers = [];
+let count = 0;
+let results = {
+                correct: 0,
+                incorrect: 0,
+                date: undefined
+};
+
 // Logged user observer:
 const isUserLogged = () => {
     auth.onAuthStateChanged((user) => {
@@ -33,67 +48,6 @@ const isUserLogged = () => {
     })
 }
 
-// Get results to create the user statistics page
-const getResults = async (db, collection, docId) => {
-    const docRef = doc(db, collection, docId);
-    const data = await getDoc(docRef);
-    const results = data.data().results;
-    return results
-}
-
-// Create results page function:
-const form = document.querySelector('#question_form');
-const resultsPage = document.querySelector('#quiz-results-page');
-
-const goToResults = async () => {
-    form.classList.toggle('off');
-    resultsPage.classList.toggle('off');
-    const correct = results.correct;
-    const incorrect = results.incorrect;
-    const data = {
-        datasets: [{
-            label: 'Results',
-            data: [correct, incorrect],
-            backgroundColor: [
-                'rgb(0, 128, 0)',
-                'rgb(255, 0, 0)'
-                
-            ]
-        }],
-        labels: [
-            'Correct',
-            'Incorrect'
-        ]
-    };
-    const config = {
-        type: 'doughnut',
-        data: data,
-        options: {}
-    };
-    resultsChart = new Chart(
-        document.getElementById('results-chart'),
-        config
-      );
-}
-
-////////////////
-
-let userLogged = false;
-let userId = undefined;
-let userName = undefined;
-
-let questions = [];
-let correctAnswers = [];
-let count = 0;
-let results = {
-                correct: 0,
-                incorrect: 0,
-                date: undefined
-};
-
-let resultsChart = undefined;
-
-
 isUserLogged()
 
 const function1 = async function getQuestions() {
@@ -107,7 +61,6 @@ const function1 = async function getQuestions() {
         });
         correctAnswers.push(item.correct_answer);
     });
-    //console.log(questions);
 }
 
 const function2 = async function test() {
@@ -175,31 +128,28 @@ function unselect() {
     radio.forEach((x) => x.checked = false);
 };
 
-
-form.addEventListener('submit', (event) => {
+const form = document.querySelector('form');
+form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
     if (count <= 9) {
         validation(event);
         function2();
         unselect();
-        //validation
-    } else {
+    } 
+    else {
         validation(event);
         count = 0;
         unselect();
         results.date = getDate();
         console.log('Se acabó!')
         console.log(results);
-        updateDoc(doc(db, 'users', userId), {
+        await updateDoc(doc(db, 'users', userId), {
             results: arrayUnion(results)
         })
-        goToResults()
+        
+        window.location.href = "../pages/results.html";
         // fin del juego 
     }
 });
 
-const newGameBtn = document.querySelector('#new-game-btn');
-newGameBtn.addEventListener('click', () => {
-    resultsChart.destroy()
-    location.reload();
-})

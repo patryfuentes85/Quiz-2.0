@@ -28,6 +28,7 @@ let userId = undefined;
 let userName = undefined;
 
 
+
 // *** GLOBAL FUNCTIONS ***
 // Log Out Function:
 const logOut = () => {
@@ -42,6 +43,10 @@ const logOut = () => {
 
 }
 
+
+const test = async () => {
+    console.log('second process')
+}
 // Log In Observer Function:
 const isUserLogged = () => {
     auth.onAuthStateChanged((user) => {
@@ -50,13 +55,16 @@ const isUserLogged = () => {
             userLogged = true;
             userId = user.email;
             userName = user.displayName;
-
-        } else {
+            domElement('#index-launch-page-section').classList.toggle('off');
+            domElement('#index-welcome-page-section').classList.toggle('off');
+        }
+        else {
             console.log('No logged user');
             userLogged = false;
             userId = undefined;
             userName = undefined;
         }
+
     })
 }
 
@@ -74,14 +82,12 @@ const domElement = (element) => {
     return retrievedElement
 }
 
-
-
 //Log out button event:
 domElement('#log-out-btn').addEventListener('click', () => {
     logOut();
 })
-// Logged user observer event:
-isUserLogged();
+
+isUserLogged()
 
 
 //Launch page:
@@ -183,8 +189,9 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
                 console.log('Usuario logado: ' + user.displayName);
             })
         domElement('#index-log-in-page-section').classList.toggle('off');
-        domElement('#index-welcome-page-section').classList.toggle('off');
-        domElement('#title').innerText = `Welcome ${userName}`; // ${auth.currentUser.displayName}
+        domElement('#index-launch-page-section').classList.toggle('off');
+        // domElement('#index-welcome-page-section').classList.toggle('off');
+        // domElement('#title').innerText = `Welcome ${userName}`; // ${auth.currentUser.displayName}
         domElement('#log-in-form').reset();
     }
     catch (error) {
