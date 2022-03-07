@@ -36,16 +36,9 @@ body {
 
 #sign-up-form > label {
     padding: 0;
-    width: 70%;
+    width: 93%;
     border-radius: unset;
-    border: none;
-}
-
-#index-log-in-page-section {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: space-around;
+    border: none;  
 }
 
 #log-in-form {
@@ -58,18 +51,12 @@ body {
 
 #log-in-form > label {
     padding: 0;
-    width: 70%;
+    width: 96%;
     border-radius: unset;
     border: none;
 }
 
 #log-in-send-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#index-welcome-page-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +78,7 @@ body {
 }
 
 #sign-up-google-btn {
-    width: 14%;
+    width: 35%;
     height: 5%;
 }
 
@@ -180,13 +167,65 @@ body #question_form {
     width: 35%;
     transform: rotate(-6deg);
 }
-
+#quests {
+    position: absolute;
+    top: 2%;
+    left: 3%;
+    width: 38px;
+} 
 #quest {
     position: absolute;
-    top: 5%;
-    left: 7%;
-    width: 70px;
+    top: 15%;
+    left: 3%;
+    width: 60px;
 } 
+
+.results-sections {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#results-title {
+    text-align: center;
+    font-size: 250%;
+    margin-top: 10%;
+}
+
+#new-game-btn {
+    font-family: monospace;
+    font-size: 20px;
+    border-radius: 0.2rem;
+    margin-bottom: 8%;
+    margin-top: 7%;
+    padding: 2%;
+} 
+
+#menu-btn {
+    font-family: monospace;
+    font-size: 20px;
+    border-radius: 0.2rem;
+    margin-bottom: 8%;
+    margin-top: 3%;
+    padding: 2%;
+}
+#graphics-div {
+    background-color: #f3f0f0e0;
+}
+
+#update-name {
+    width: 68%;
+}
+
+#delete-account {
+    color: darkred;
+    border-color: darkred;
+}
+
+
 .off {
     display: none;
 }
