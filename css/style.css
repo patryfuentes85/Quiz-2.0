@@ -7,14 +7,96 @@ body {
     background-position: center center;
     width: 100vw;
     height: 100vh;
+    font-family: monospace;
+    color: white;
 }
+
+#title {
+    text-align: center;
+    font-size: 250%;
+    margin-top: 10%;
+
+}
+
+.index-sections {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: space-around;
+    
+}
+
+#sign-up-form {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sign-up-form > label {
+    padding: 0;
+    width: 93%;
+    border-radius: unset;
+    border: none;  
+}
+
+#log-in-form {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-direction: column;
+    align-items: center;
+}
+
+#log-in-form > label {
+    padding: 0;
+    width: 96%;
+    border-radius: unset;
+    border: none;
+}
+
+#log-in-send-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#update-name-form {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-direction: column;
+    align-items: center;
+}
+
+#update-name-form > label {
+    padding: 0;
+    width: 70%;
+    border-radius: unset;
+    border: none;
+}
+
+#sign-up-google-btn {
+    width: 35%;
+    height: 5%;
+}
+
+ .index-buttons {
+    font-family: monospace;
+    font-size: 20px;
+    border-radius: 0.2rem;
+    margin-bottom: 8%;
+    margin-top: 10%;
+    padding: 2%;
+} 
 
 #question-number {
     color: white;
     font-family: monospace;
 }
 
-form {
+#question_form {
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -38,16 +120,17 @@ body #question_form {
     text-align: center;
     background-color: rgb(2 46 85 / 80%);
     border-radius: 0.9rem;
+    margin-top: 8%;
 }
 
-form > label {
+#question_form > label {
     border-style: groove;
     color: white;
     border-color: white;
     border-radius: 0.5rem;
     padding: 16px 5px;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 4%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,16 +140,17 @@ form > label {
     font-size: 14px;
 }
 
-form > label:hover{
+#question_form > label:hover{
     background-color: white;
     font-weight: bold;
     color: black;
     font-weight: bold;
-}
-
-/* .inputClass {
+} 
+ 
+/* ===========Cuando oculto los input ya no me funciona la validación =============*/
+  .inputClass {
     display: none;
-} */
+}
 
 
 #next-button {
@@ -83,18 +167,68 @@ form > label:hover{
     width: 35%;
     transform: rotate(-6deg);
 }
-
+#quests {
+    position: absolute;
+    top: 2%;
+    left: 3%;
+    width: 38px;
+} 
 #quest {
     position: absolute;
-    top: 81%;
-    left: 62%;
-    width: 100px;
+    top: 15%;
+    left: 3%;
+    width: 60px;
+} 
+
+.results-sections {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
 }
+
+#results-title {
+    text-align: center;
+    font-size: 250%;
+    margin-top: 10%;
+}
+
+#new-game-btn {
+    font-family: monospace;
+    font-size: 20px;
+    border-radius: 0.2rem;
+    margin-bottom: 8%;
+    margin-top: 7%;
+    padding: 2%;
+} 
+
+#menu-btn {
+    font-family: monospace;
+    font-size: 20px;
+    border-radius: 0.2rem;
+    margin-bottom: 8%;
+    margin-top: 3%;
+    padding: 2%;
+}
+#graphics-div {
+    background-color: #f3f0f0e0;
+}
+
+#update-name {
+    width: 68%;
+}
+
+#delete-account {
+    color: darkred;
+    border-color: darkred;
+}
+
 
 .off {
     display: none;
 }
-
 /* @media (max-width: 768px) {
   
 } */

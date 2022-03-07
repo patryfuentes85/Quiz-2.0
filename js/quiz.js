@@ -25,9 +25,9 @@ let questions = [];
 let correctAnswers = [];
 let count = 0;
 let results = {
-                correct: 0,
-                incorrect: 0,
-                date: undefined
+    correct: 0,
+    incorrect: 0,
+    date: undefined
 };
 
 // Logged user observer:
@@ -70,7 +70,7 @@ const function2 = async function test() {
     })
 
     const h2 = document.querySelector('h2');
-    h2.innerText = `${questions[count].question}`;
+    h2.innerHTML = `${questions[count].question}`;
 
     const span = document.querySelector('#question-number');
     span.innerText = `Question Number: ${count + 1}`
@@ -82,7 +82,7 @@ const function2 = async function test() {
 
     const labels = document.querySelectorAll('label');
     labels.forEach((item, index) => {
-        item.innerText = `${randomAnswers[count][index]}`;
+        item.innerHTML = `${randomAnswers[count][index]}`;
     })
     count++;
 
@@ -98,10 +98,14 @@ mother()
 console.log(correctAnswers);
 
 const getDate = () => {
-    const date = new Date();
-    const date2 = `0${date.getDate()}/0${date.getMonth()}/${date.getFullYear()}`;
-    const time = `${date.getHours()}:${date.getMinutes()}`;
-    return [date2, time].join(' ')
+    const newDate = new Date();
+    const day = newDate.getDate() >= 10 ? newDate.getDate() : `0${newDate.getDate()}`;
+    const month = newDate.getMonth() >= 10 ? newDate.getMonth() : `0${newDate.getMonth()}`;
+    const year = newDate.getFullYear();
+    const hour = newDate.getHours() >= 10 ? newDate.getHours() : `0${date.getHours()}`;
+    const minutes = newDate.getMinutes() >= 10 ? newDate.getMinutes() : `0${date.getMinutes()}`;
+    const fullDate = `${day}/${month}/${year} - ${hour}:${minutes}`;
+    return fullDate
 }
 
 const validation = event => {
@@ -136,7 +140,7 @@ form.addEventListener('submit', async (event) => {
         validation(event);
         function2();
         unselect();
-    } 
+    }
     else {
         validation(event);
         count = 0;
@@ -147,7 +151,7 @@ form.addEventListener('submit', async (event) => {
         await updateDoc(doc(db, 'users', userId), {
             results: arrayUnion(results)
         })
-        
+
         window.location.href = "../pages/results.html";
         // fin del juego 
     }

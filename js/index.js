@@ -58,7 +58,7 @@ const isUserLogged = () => {
             domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-welcome-page-section').classList.toggle('off');
             domElement('#title').innerText = `Welcome ${userName}`;
-                }
+        }
         else {
             console.log('No logged user');
             userLogged = false;
@@ -302,4 +302,3 @@ domElement('#back-my-profile-btn').addEventListener('click', () => {
     domElement('#index-my-profile-page-section').classList.toggle('off');
     domElement('#title').innerText = `Welcome ${userName}`;
 })
-
