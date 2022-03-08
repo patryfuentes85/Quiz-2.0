@@ -152,6 +152,20 @@ body #question_form {
     display: none;
 }
 
+.goback-btn {
+    background-color: rgb(41, 121, 126);
+    border: 0 solid black;
+    color: #000000;
+    display: flex;
+    margin: auto;
+    font-family: monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0.75rem 1.65rem;
+    text-align: center;
+    width: 35%;
+    transform: rotate(-6deg);
+}
 
 #next-button {
     background-color: white;
