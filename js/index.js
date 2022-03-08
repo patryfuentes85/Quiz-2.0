@@ -43,10 +43,6 @@ const logOut = () => {
 
 }
 
-
-const test = async () => {
-    console.log('second process')
-}
 // Log In Observer Function:
 const isUserLogged = () => {
     auth.onAuthStateChanged((user) => {
@@ -102,6 +98,16 @@ domElement('#log-in-btn').addEventListener('click', () => {
     domElement('#index-log-in-page-section').classList.toggle('off');
     domElement('#title').innerText = 'Log In';
 })
+
+const buttons = document.querySelectorAll('.goback-btn');
+
+[...buttons].map((item )=> item.addEventListener('click', () => {
+    location.reload();
+
+}));
+
+
+
 
 //Sign Up Formulary event:
 domElement('#sign-up-form').addEventListener('submit', async (event) => {
@@ -195,6 +201,16 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
         // domElement('#index-welcome-page-section').classList.toggle('off');
         // domElement('#title').innerText = `Welcome ${userName}`; // ${auth.currentUser.displayName}
         domElement('#log-in-form').reset();
+
+        domElement('#back-my-profile-btn').addEventListener('click', () => {
+    // This is why the chart had to be declared on global scope as undefined, so we could destroy it here
+    resultsChart.destroy()
+
+    domElement('#index-welcome-page-section').classList.toggle('off');
+    domElement('#index-my-profile-page-section').classList.toggle('off');
+    domElement('#title').innerText = `Welcome ${userName}`;
+})
+    
     }
     catch (error) {
         const errorCode = error.code;
@@ -290,7 +306,7 @@ domElement('#delete-account').addEventListener('click', () => {
 
     domElement('#index-launch-page-section').classList.toggle('off');
     domElement('#index-my-profile-page-section').classList.toggle('off');
-    domElement('#title').innerText = `Title`;
+    domElement('#title').innerText = `Quiz Time!!`;
 })
 
 // Go back to Welcome page button:

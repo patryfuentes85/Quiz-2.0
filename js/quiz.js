@@ -50,7 +50,7 @@ const isUserLogged = () => {
 
 isUserLogged()
 
-const function1 = async function getQuestions() {
+async function getQuestions() {
     let response = await fetch(`https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple`);
     let data = await response.json();
     let final = await data.results.map((item, index) => {
@@ -73,10 +73,9 @@ const function1 = async function getQuestions() {
     questions.forEach(question => {
         correctAnswers.push(question.correct_answer)
     });
-    
 }
 
-const function2 = async function test() {
+async function paintQuiz() {
 
     let randomAnswers = questions.map((quest, index) => {
         return [...questions[index].incorrect_answers, questions[index].correct_answer].sort(() => 0.5 - Math.random())
@@ -104,18 +103,18 @@ const function2 = async function test() {
 }
 
 
-const mother = async () => {
-    const a = await function1();
-    const b = await function2();
+const init = async () => {
+    await getQuestions();
+    await paintQuiz();
 }
-mother()
+init()
 
 console.log(correctAnswers);
 
 const getDate = () => {
     const newDate = new Date();
     const day = newDate.getDate() >= 10 ? newDate.getDate() : `0${newDate.getDate()}`;
-    const month = newDate.getMonth() >= 10 ? newDate.getMonth() : `0${newDate.getMonth()}`;
+    const month = newDate.getMonth() >= 10 ? newDate.getMonth()+1 : `0${(newDate.getMonth()+1)}`;
     const year = newDate.getFullYear();
     const hour = newDate.getHours() >= 10 ? newDate.getHours() : `0${newDate.getHours()}`;
     const minutes = newDate.getMinutes() >= 10 ? newDate.getMinutes() : `0${newDate.getMinutes()}`;
@@ -153,7 +152,7 @@ form.addEventListener('submit', async (event) => {
 
     if (count <= 9) {
         validation(event);
-        function2();
+        paintQuiz();
         unselect();
     }
     else {
