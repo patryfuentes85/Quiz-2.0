@@ -81,8 +81,7 @@ async function paintQuiz() {
         return [...questions[index].incorrect_answers, questions[index].correct_answer].sort(() => 0.5 - Math.random())
     })
     
-    console.log(questions);
-    console.log(correctAnswers);
+    console.log(correctAnswers)
     const h2 = document.querySelector('h2');
     h2.innerHTML = `${questions[count].question}`;
 
@@ -109,7 +108,6 @@ const init = async () => {
 }
 init()
 
-console.log(correctAnswers);
 
 const getDate = () => {
     const newDate = new Date();
@@ -131,12 +129,10 @@ const validation = event => {
     } else if (correctAnswers[count - 1] == radio) {
         results.correct += 1;
         console.log('Respuesta Correcta');
-
     } else if (correctAnswers[count - 1] !== radio) {
         results.incorrect += 1;
         console.log('Respuesta Incorrecta');
     }
-    console.log(radio);
 };
 
 // Deseleccionar Radios

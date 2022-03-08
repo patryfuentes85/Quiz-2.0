@@ -273,6 +273,7 @@ domElement('#update-name-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
     const newName = event.target['update-name'].value;
+    userName = newName;
     const docRef = doc(db, 'users', userId);
     updateDoc(docRef, {
         userName: newName
@@ -292,6 +293,7 @@ domElement('#reset-stats').addEventListener('click', () => {
 domElement('#delete-account').addEventListener('click', () => {
     const user = auth.currentUser;
     try {
+        confirm("Are you sure you want to delete your account?")
         deleteUser(user).then(() => {
             console.log('User deleted')
         })
@@ -312,7 +314,10 @@ domElement('#delete-account').addEventListener('click', () => {
 // Go back to Welcome page button:
 domElement('#back-my-profile-btn').addEventListener('click', () => {
     // This is why the chart had to be declared on global scope as undefined, so we could destroy it here
-    resultsChart.destroy()
+    if (resultsChart !== undefined) {
+        resultsChart.destroy()
+    }
+    
 
     domElement('#index-welcome-page-section').classList.toggle('off');
     domElement('#index-my-profile-page-section').classList.toggle('off');

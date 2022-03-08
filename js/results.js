@@ -16,6 +16,10 @@ const db = getFirestore();
 const auth = getAuth();
 
 
+
+const correctLegend = document.querySelector('#correct');
+const incorrectLegend = document.querySelector('#incorrect');
+
 // Logged user observer:
 const isUserLogged = async () => {
     auth.onAuthStateChanged((user) => {
@@ -26,6 +30,10 @@ const isUserLogged = async () => {
             userName = user.displayName;
             getResults(user.email)
                 .then(results => getChart(results))
+                .then(results => {
+                    correctLegend.innerText = `Correct: ${results[results.length - 1].correct}`;
+                    incorrectLegend.innerText = `Incorrect: ${results[results.length - 1].incorrect}`;
+                })
 
         } else {
             console.log('No logged user');
@@ -47,33 +55,31 @@ const getResults = async (userId) => {
 
 const getChart = (results) => {
     const data = {
-        labels: [
-          'Correct',
-          'Incorrect'
-        ],
+        labels: '',
         datasets: [{
-          label: 'Results',
-          data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
-          backgroundColor: [
-            'rgb(0, 255, 0)',
-            'rgb(255, 0, 0)'
-          ]
+            label: 'Results',
+            data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
+            backgroundColor: [
+                'rgb(0, 255, 0)',
+                'rgb(255, 0, 0)'
+            ]
         }]
-      };
-      const config = {
+    };
+    const config = {
         type: 'doughnut',
         data: data,
-      };
-      resultsChart = new Chart(document.getElementById('results-chart'),
-      config
+    };
+    resultsChart = new Chart(document.getElementById('results-chart'),
+        config
     );
+    return results
 }
 
-const asyncLauncher = async() => {
-    const a = await isUserLogged();
-    const b = await getResults();
-    getChart(b);
-}
+// const init = async() => {
+//     await isUserLogged();
+//     const data = await getResults();
+//     getChart(data);
+// }
 
 //////////////
 let userLogged = false;
@@ -85,10 +91,12 @@ isUserLogged()
 
 const newGameBtn = document.querySelector('#new-game-btn');
 newGameBtn.addEventListener('click', () => {
+    resultsChart.destroy()
     window.location.href = "../pages/quiz.html";
 })
 
 const menuBtn = document.querySelector('#menu-btn');
 menuBtn.addEventListener('click', () => {
+    resultsChart.destroy()
     window.location.href = "../index.html";
 })
