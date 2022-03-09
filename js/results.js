@@ -1,7 +1,29 @@
 // *** FIREBASE SETUP ***:
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, deleteUser, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    updateProfile,
+    deleteUser,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {
+    getFirestore,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    setDoc,
+    updateDoc,
+    deleteDoc,
+    arrayUnion,
+    arrayRemove
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDA3yVi5k-EuRIZJhvRonfFrR2fia0c_Pg",
@@ -48,28 +70,37 @@ const getResults = async (userId) => {
 const getChart = (results) => {
     const data = {
         labels: [
-          'Correct',
-          'Incorrect'
+            `Correct: ${results[results.length - 1].correct}`,
+            `Incorrect: ${results[results.length - 1].incorrect}`
         ],
         datasets: [{
-          label: 'Results',
-          data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
-          backgroundColor: [
-            'rgb(0, 255, 0)',
-            'rgb(255, 0, 0)'
-          ]
+            label: 'Results',
+            data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
+            backgroundColor: [
+                'rgb(1, 89, 15)',
+                'rgb(203, 50, 52)'
+            ],
+            borderColor: ['lightgrey']
         }]
-      };
-      const config = {
+    };
+    const config = {
         type: 'doughnut',
         data: data,
-      };
-      resultsChart = new Chart(document.getElementById('results-chart'),
-      config
+        options: {
+            legend: {
+                labels: {
+                    fontColor: 'white',
+                }
+            }
+        }
+    };
+    resultsChart = new Chart(document.getElementById('results-chart'),
+        config
     );
+    options;
 }
 
-const asyncLauncher = async() => {
+const asyncLauncher = async () => {
     const a = await isUserLogged();
     const b = await getResults();
     getChart(b);
