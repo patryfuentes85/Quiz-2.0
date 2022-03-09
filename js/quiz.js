@@ -25,9 +25,9 @@ let questions = [];
 let correctAnswers = [];
 let count = 0;
 let results = {
-                correct: 0,
-                incorrect: 0,
-                date: undefined
+    correct: 0,
+    incorrect: 0,
+    date: undefined
 };
 
 // Logged user observer:
@@ -60,6 +60,8 @@ async function getQuestions() {
             'incorrect_answers': item.incorrect_answers
         });
     });
+
+
     let response2 = await fetch(`https://api.trivia.willfry.co.uk/questions?categories=general_knowledge&limit=5`);
     let data2 = await response2.json();
     let final2 = await data2.map(item => {
@@ -81,7 +83,8 @@ async function paintQuiz() {
     let randomAnswers = questions.map((quest, index) => {
         return [...questions[index].incorrect_answers, questions[index].correct_answer].sort(() => 0.5 - Math.random())
     })
-
+    
+    console.log(correctAnswers)
     const h2 = document.querySelector('h2');
     h2.innerHTML = `${questions[count].question}`;
 
@@ -108,7 +111,6 @@ const init = async () => {
 }
 init()
 
-console.log(correctAnswers);
 
 const getDate = () => {
     const newDate = new Date();
@@ -130,12 +132,10 @@ const validation = event => {
     } else if (correctAnswers[count - 1] == radio) {
         results.correct += 1;
         console.log('Respuesta Correcta');
-
     } else if (correctAnswers[count - 1] !== radio) {
         results.incorrect += 1;
         console.log('Respuesta Incorrecta');
     }
-    console.log(radio);
 };
 
 // Deseleccionar Radios
@@ -153,7 +153,7 @@ form.addEventListener('submit', async (event) => {
         validation(event);
         paintQuiz();
         unselect();
-    } 
+    }
     else {
         validation(event);
         count = 0;
@@ -164,7 +164,7 @@ form.addEventListener('submit', async (event) => {
         await updateDoc(doc(db, 'users', userId), {
             results: arrayUnion(results)
         })
-        
+
         window.location.href = "../pages/results.html";
         // fin del juego 
     }

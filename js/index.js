@@ -39,7 +39,7 @@ const logOut = () => {
         })
     document.querySelector('#index-welcome-page-section').classList.toggle('off');
     document.querySelector('#index-launch-page-section').classList.toggle('off');
-    document.querySelector('#title').innerText = 'Title';
+    document.querySelector('#title').innerText = 'Quiz Time !!';
 
 }
 
@@ -53,8 +53,8 @@ const isUserLogged = () => {
             userName = user.displayName;
             domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-welcome-page-section').classList.toggle('off');
-            domElement('#title').innerText = `Welcome ${userName}`;
-                }
+            domElement('#title').innerText = `Welcome ${userName}!`;
+        }
         else {
             console.log('No logged user');
             userLogged = false;
@@ -101,7 +101,7 @@ domElement('#log-in-btn').addEventListener('click', () => {
 
 const buttons = document.querySelectorAll('.goback-btn');
 
-[...buttons].map((item )=> item.addEventListener('click', () => {
+[...buttons].map((item) => item.addEventListener('click', () => {
     location.reload();
 
 }));
@@ -138,7 +138,7 @@ domElement('#sign-up-form').addEventListener('submit', async (event) => {
             domElement('#index-launch-page-section').classList.toggle('off');
             domElement('#index-sign-up-page-section').classList.toggle('off');
             // domElement('#index-welcome-page-section').classList.toggle('off');
-            domElement('#title').innerText = `Welcome ${auth.currentUser.displayName}`;
+            domElement('#title').innerText = `Welcome ${auth.currentUser.displayName}!`;
             domElement('#sign-up-form').reset();
         }
         catch (error) {
@@ -173,7 +173,7 @@ domElement('#sign-up-google-btn').addEventListener('click', () => {
         .then(() => {
             // domElement('#index-launch-page-section').classList.toggle('off');
             // domElement('#index-welcome-page-section').classList.toggle('off');
-            domElement('#title').innerText = `Welcome ${userName.split(' ')[0]}`;
+            domElement('#title').innerText = `Welcome ${userName.split(' ')[0]}!`;
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -203,14 +203,14 @@ domElement('#log-in-form').addEventListener('submit', async (event) => {
         domElement('#log-in-form').reset();
 
         domElement('#back-my-profile-btn').addEventListener('click', () => {
-    // This is why the chart had to be declared on global scope as undefined, so we could destroy it here
-    resultsChart.destroy()
+            // This is why the chart had to be declared on global scope as undefined, so we could destroy it here
+            resultsChart.destroy()
 
-    domElement('#index-welcome-page-section').classList.toggle('off');
-    domElement('#index-my-profile-page-section').classList.toggle('off');
-    domElement('#title').innerText = `Welcome ${userName}`;
-})
-    
+            domElement('#index-welcome-page-section').classList.toggle('off');
+            domElement('#index-my-profile-page-section').classList.toggle('off');
+            domElement('#title').innerText = `Welcome ${userName}!`;
+        })
+
     }
     catch (error) {
         const errorCode = error.code;
@@ -273,50 +273,65 @@ domElement('#update-name-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
     const newName = event.target['update-name'].value;
+    userName = newName;
     const docRef = doc(db, 'users', userId);
     updateDoc(docRef, {
         userName: newName
-    });
+    }).then(() => {
+        alert(`Name changed to ${newName}!`);
+        domElement('#update-name-form').reset();
+    })
 
 })
 
 // Reset statistics option:
 domElement('#reset-stats').addEventListener('click', () => {
     const docRef = doc(db, 'users', userId);
-    updateDoc(docRef, {
-        results: []
-    })
+    let confirmation = confirm('Are you sure you want to restart your progress?')
+    if (confirmation) {
+        updateDoc(docRef, {
+            results: []
+        })
+        resultsChart.destroy();
+        alert('Stats deleted!')
+    }   
 });
 
 // Delete account option:
 domElement('#delete-account').addEventListener('click', () => {
     const user = auth.currentUser;
     try {
-        deleteUser(user).then(() => {
-            console.log('User deleted')
-        })
-        deleteDoc(doc(db, 'users', userId))
-            .then(() => {
-                console.log('Doc deleted')
+        let confirmation = confirm("Are you sure you want to delete your account?");
+        if (confirmation) {
+            deleteUser(user).then(() => {
+                console.log('User deleted')
             })
-        resultsChart.destroy()
+            deleteDoc(doc(db, 'users', userId))
+                .then(() => {
+                    console.log('Doc deleted')
+                })
+            resultsChart.destroy();
+            alert('Account deleted!')
+            domElement('#index-launch-page-section').classList.toggle('off');
+            domElement('#index-my-profile-page-section').classList.toggle('off');
+            domElement('#title').innerText = `Quiz Time!!`;
+        }
     } catch (error) {
         console.log(error)
     }
 
-    domElement('#index-launch-page-section').classList.toggle('off');
-    domElement('#index-my-profile-page-section').classList.toggle('off');
-    domElement('#title').innerText = `Quiz Time!!`;
+
 })
 
 // Go back to Welcome page button:
 domElement('#back-my-profile-btn').addEventListener('click', () => {
     // This is why the chart had to be declared on global scope as undefined, so we could destroy it here
-    resultsChart.destroy()
+    if (resultsChart !== undefined) {
+        resultsChart.destroy()
+    }
+
 
     domElement('#index-welcome-page-section').classList.toggle('off');
     domElement('#index-my-profile-page-section').classList.toggle('off');
-    domElement('#title').innerText = `Welcome ${userName}`;
+    domElement('#title').innerText = `Welcome ${userName}!`;
 })
-
-

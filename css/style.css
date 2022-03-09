@@ -7,13 +7,14 @@ body {
     height: 100vh;
     font-family: monospace;
     color: white;
+    margin: 0;
 }
 
 #title {
     text-align: center;
     font-size: 250%;
-    margin-top: 10%;
-
+    padding-top: 10%;
+    margin: 0;
 }
 
 .index-sections {
@@ -42,6 +43,7 @@ body {
     width: 93%;
     border-radius: unset;
     border: none;
+    margin-bottom: .5rem;
 }
 
 #log-in-form>input,
@@ -67,8 +69,7 @@ body {
     font-family: monospace;
     font-size: 20px;
     border-radius: 0.2rem;
-    margin-bottom: 7%;
-    margin-top: 6%;
+    margin: 6% 5rem 7% 5rem; 
     padding: 2%;
 }
 
@@ -92,8 +93,8 @@ body #question_form {
     font-size: 16px;
     color: white;
     border: 2px solid white;
-    padding: 9% 3%;
-    margin: 3%;
+    padding: .5rem 0;
+    /* margin: 3%; */
     text-align: center;
     background-color: rgb(2 46 85 / 80%);
     border-radius: 0.9rem;
@@ -106,15 +107,16 @@ body #question_form {
     border-color: white;
     border-radius: 0.5rem;
     padding: 16px 5px;
-    margin: auto;
+    /* margin: auto; */
     margin-top: 4%;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     width: 75vw;
-    flex-flow: column wrap;
+    /* flex-flow: column wrap; */
     font-family: monospace;
     font-size: 14px;
+    text-align: center;
 }
 
 #question_form>label:hover {
@@ -161,16 +163,16 @@ body #question_form {
 
 #quests {
     position: absolute;
-    top: 2%;
-    left: 3%;
+    top: 22%;
+    left: 0;
     width: 38px;
 }
 
 #quest {
     position: absolute;
-    top: 1%;
+    top: 15%;
     left: 3%;
-    width: 60px;
+    width: 55px;
 }
 
 .results-sections {
@@ -180,6 +182,8 @@ body #question_form {
     align-content: center;
     justify-content: flex-start;
     align-items: center;
+    width: 100vw;
+    margin: 0;
 }
 
 #results-title {
@@ -195,6 +199,10 @@ body #question_form {
     margin-bottom: 8%;
     margin-top: 7%;
     padding: 2%;
+} 
+a {
+    text-decoration: none;
+    color: black;
 }
 
 #menu-btn {
@@ -209,7 +217,12 @@ body #question_form {
 #graphics-div {
     background-color: #f3f0f0e0;
     width: 80vw;
-    margin-left: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h3 {
+    margin-left: 3%;
 }
 
 #update-name {
@@ -222,8 +235,8 @@ body #question_form {
 }
 
 #graphics-container {
-    width: 66%;
-    margin-left: -22%;
+    width: 100%;
+    margin-left: 0;
 }
 
 #settings-container{
@@ -231,14 +244,32 @@ body #question_form {
     flex-direction: column;
     align-content: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     align-items: stretch;
-    width: 55%;
+    width: 100%;
+}
+#settings-container > form > input:nth-of-type(1) {
+    width: 80%;
 }
 
 .off {
     display: none;
 }
+
+p {
+    text-align: center;
+}
+
+#correct {
+    color: green;
+    font-size: 1rem;
+    font-weight: bold;
+}
+#incorrect {
+    color: red;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
@@ -257,7 +288,7 @@ body #question_form {
         text-align: center;
         width: 96%;
         height: 5%;
-
+        padding: 2rem;
     }
 
     .index-sections {
@@ -310,6 +341,7 @@ body #question_form {
         width: 21%;
         height: 2%;
         border-radius: 50%;
+        margin: 0;
     }
 
     .index-buttons {
@@ -317,8 +349,15 @@ body #question_form {
         font-size: 24px;
         border-radius: -2.8rem;
         margin-bottom: 8%;
-        margin-top: 11%;
+        margin-top: 3rem;
         padding: 3%;
+        width: 12rem;
+    }
+
+    .my-profile-btn {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #graphics-div {
@@ -346,12 +385,11 @@ body #question_form {
         font-size: 24px;
         color: white;
         border: 2px solid white;
-        padding: 9% 3%;
-        margin: 3%;
         text-align: center;
         background-color: rgb(2 46 85 / 80%);
         border-radius: 0.9rem;
-        margin-top: 6%;
+        padding: 2rem 1rem;
+        margin: 1.5rem 0;;
     }
 
     #question_form>label {
@@ -427,7 +465,7 @@ body #question_form {
 
     #quests {
         position: absolute;
-        top: 2%;
+        top: 40%;
         left: 6%;
         width: 61px;
     }
@@ -502,9 +540,159 @@ body #question_form {
     .off {
         display: none;
     }
+}
 
+@media screen and (min-width: 993px) {
+    body {
+        width: 100vw;
+        height: 90vh;
+        margin: 0;
+        padding-top: 1rem;
+    }
+    #title {
+        margin: 0 0 2rem 0;
+        font-size: 3rem;
+    }
+    .index-sections {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
 
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .index-buttons {
+        margin: 2rem;
+        width: 300px;
+    }
+    #sign-up-google-btn {
+        margin: 2rem;
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+    #quest {
+        width: 200px;
+        position: absolute;
+        top: 10%;
+        left: 0;
+    }
+    #quests {
+        top: 30%;
+    }
 
+    /*  FORMS */
+    .index-sections > form {
+        width: 40vw;
+        height: 70vh;
+    }
+    .index-sections > form > label {
+        font-size: 1.5rem;
+    }
+    .index-sections > form > input {
+        width: 80%;
+        height: 1.5rem;
+    }
+    .index-sections > form > input[type='submit'] {
+        margin: 2rem;
+        width: 300px;
+        height: 3rem;
+    }
 
+    #new-game-btn {
+        margin: 2rem;
+    }
+    #back-my-profile-btn {
+        position: absolute;
+        top: 0;
+        right: 10%;
+        width: 6rem;
+        height: 3rem;
+        padding: 0;
+        text-align: center;
+    }
 
+    /* MY PROFILE PAGE */
+    #graphics-div {
+        width: 700px;
+    }
+    #settings-container > h3 {
+        margin-top : 3rem;
+    }
+    .my-profile-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    #update-name {
+        width: 10%;
+        height: 1.5rem;
+    }
+    
+    div > h3 {
+        font-size: 1.5rem;
+    }
+
+    /*  QUESTION PAGE */
+    body > #question-form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    #question-number {
+        font-size: 1.5rem;
+    }
+    #textQ {
+        margin: 2rem;
+        padding: 3rem;
+        font-size: 1.5rem;
+    }
+    #question_form > label {
+        width: 50vw;
+        font-size: large;
+    }
+    input[type='radio']:checked + label {
+        color: black;
+        background-color: #fcaf3e;
+        font-weight: bold;
+        
+    }
+    #question_form > label:hover {
+        background-color: #fcaf3e;
+        color: white;
+    }
+
+    #next-button {
+        margin-top: 3rem;
+        text-align: center;
+        justify-content: center;
+    }
+
+    #quests {
+        width: 200px;
+    }
+    
+    #quiz-results-page {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        width: 100vw;
+    }
+    #results-container > h3 {
+        margin: 0 0 .5rem 0;
+    }
+    #results-chart {
+        width: 35vw;
+    }
+    #menu-btn {
+        margin: 0;
+    }
 }
