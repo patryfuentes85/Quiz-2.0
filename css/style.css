@@ -73,10 +73,6 @@ body {
     padding: 2%;
 }
 
-.my-profile-btn {
-    
-}
-
 #question_form {
     margin: auto;
     display: flex;
@@ -551,7 +547,7 @@ p {
         width: 100vw;
         height: 90vh;
         margin: 0;
-        padding-top: 2rem;
+        padding-top: 1rem;
     }
     #title {
         margin: 0 0 2rem 0;
@@ -585,6 +581,9 @@ p {
         position: absolute;
         top: 10%;
         left: 0;
+    }
+    #quests {
+        top: 30%;
     }
 
     /*  FORMS */
@@ -630,10 +629,11 @@ p {
         margin-right: auto;
         display: block;
     }
-    #update-name-form > input:nth-of-type(1) {
-        width: 50%;
+    #update-name {
+        width: 10%;
         height: 1.5rem;
     }
+    
     div > h3 {
         font-size: 1.5rem;
     }
@@ -655,6 +655,17 @@ p {
     }
     #question_form > label {
         width: 50vw;
+        font-size: large;
+    }
+    input[type='radio']:checked + label {
+        color: black;
+        background-color: #fcaf3e;
+        font-weight: bold;
+        
+    }
+    #question_form > label:hover {
+        background-color: #fcaf3e;
+        color: white;
     }
 
     #next-button {
@@ -667,4 +678,21 @@ p {
         width: 200px;
     }
     
+    #quiz-results-page {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        width: 100vw;
+    }
+    #results-container > h3 {
+        margin: 0 0 .5rem 0;
+    }
+    #results-chart {
+        width: 35vw;
+    }
+    #menu-btn {
+        margin: 0;
+    }
 }
