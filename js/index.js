@@ -39,7 +39,7 @@ const logOut = () => {
         })
     document.querySelector('#index-welcome-page-section').classList.toggle('off');
     document.querySelector('#index-launch-page-section').classList.toggle('off');
-    document.querySelector('#title').innerText = 'Title';
+    document.querySelector('#title').innerText = 'Quiz Time !!';
 
 }
 

@@ -78,8 +78,6 @@ const getResults = async (userId) => {
 const getChart = (results) => {
     const data = {
         labels: [
-            `Correct: ${results[results.length - 1].correct}`,
-            `Incorrect: ${results[results.length - 1].incorrect}`
         ],
         datasets: [{
             label: 'Results',
