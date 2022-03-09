@@ -1,5 +1,3 @@
-
-
 body {
     background-image: url(../assets/abstractblue.jpeg);
     background-size: cover;
@@ -23,43 +21,33 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: space-around;
-    
+    align-items: stretch;
 }
 
-#sign-up-form {
-    display: flex;
-    justify-content: space-evenly;
-    align-content: stretch;
-    flex-direction: column;
-    align-items: center;
-}
 
-#sign-up-form > label {
-    padding: 0;
-    width: 93%;
-    border-radius: unset;
-    border: none;  
-}
-
+#sign-up-form,
 #log-in-form {
     display: flex;
     justify-content: space-evenly;
     align-content: stretch;
     flex-direction: column;
     align-items: center;
+    width: 60%;
 }
 
-#log-in-form > label {
+#sign-up-form>label,
+#log-in-form>label,
+#update-name-form>label {
     padding: 0;
-    width: 96%;
+    width: 93%;
     border-radius: unset;
     border: none;
 }
 
-#log-in-send-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#log-in-form>input,
+#sign-up-form>input,
+#update-name {
+    width: 100%;
 }
 
 #update-name-form {
@@ -70,30 +58,18 @@ body {
     align-items: center;
 }
 
-#update-name-form > label {
-    padding: 0;
-    width: 70%;
-    border-radius: unset;
-    border: none;
-}
-
 #sign-up-google-btn {
     width: 35%;
     height: 5%;
 }
 
- .index-buttons {
+.index-buttons {
     font-family: monospace;
     font-size: 20px;
     border-radius: 0.2rem;
-    margin-bottom: 8%;
-    margin-top: 10%;
+    margin-bottom: 7%;
+    margin-top: 6%;
     padding: 2%;
-} 
-
-#question-number {
-    color: white;
-    font-family: monospace;
 }
 
 #question_form {
@@ -104,6 +80,7 @@ body {
     width: 100vw;
     height: auto;
 }
+
 body #question_form {
     display: flex;
     justify-content: center;
@@ -123,7 +100,7 @@ body #question_form {
     margin-top: 8%;
 }
 
-#question_form > label {
+#question_form>label {
     border-style: groove;
     color: white;
     border-color: white;
@@ -140,18 +117,32 @@ body #question_form {
     font-size: 14px;
 }
 
-#question_form > label:hover{
+#question_form>label:hover {
     background-color: white;
     font-weight: bold;
     color: black;
     font-weight: bold;
-} 
- 
-/* ===========Cuando oculto los input ya no me funciona la validación =============*/
-  .inputClass {
+}
+
+.inputClass {
     display: none;
 }
 
+.goback-btn {
+    background-color: rgb(228 158 54);
+    border: solid black;
+    color: #000000;
+    display: flex;
+    margin: auto;
+    font-family: monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding: 0.75rem 1.65rem;
+    text-align: center;
+    width: 35%;
+    transform: rotate(-6deg);
+    margin-top: 22%;
+}
 
 #next-button {
     background-color: white;
@@ -167,18 +158,20 @@ body #question_form {
     width: 35%;
     transform: rotate(-6deg);
 }
+
 #quests {
     position: absolute;
     top: 2%;
     left: 3%;
     width: 38px;
-} 
+}
+
 #quest {
     position: absolute;
-    top: 15%;
+    top: 1%;
     left: 3%;
     width: 60px;
-} 
+}
 
 .results-sections {
     display: flex;
@@ -216,12 +209,15 @@ a {
     margin-top: 3%;
     padding: 2%;
 }
+
 #graphics-div {
     background-color: #f3f0f0e0;
+    width: 80vw;
+    margin-left: 10%;
 }
 
 #update-name {
-    width: 68%;
+    width: 93%;
 }
 
 #delete-account {
@@ -229,13 +225,24 @@ a {
     border-color: darkred;
 }
 
+#graphics-container {
+    width: 66%;
+    margin-left: -22%;
+}
+
+#settings-container{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 55%;
+}
 
 .off {
     display: none;
 }
-/* @media (max-width: 768px) {
-  
-} */
 
 @media screen and (min-width: 1024px) {
     body {
@@ -352,4 +359,272 @@ p {
 }
 #incorrect {
     color: red;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    body {
+        background-image: url(../assets/abstractblue.jpeg);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+        width: 100vw;
+        height: 100vh;
+        font-family: monospace;
+        color: white;
+    }
+
+    #title {
+        text-align: center;
+        width: 96%;
+        height: 5%;
+
+    }
+
+    .index-sections {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: stretch;
+        justify-content: space-evenly;
+        align-items: flex-end;
+
+    }
+
+    #sign-up-form,
+    #log-in-form {
+        display: flex;
+        justify-content: space-evenly;
+        align-content: stretch;
+        flex-direction: column;
+        align-items: center;
+        width: 49%;
+        margin-left: 5%;
+    }
+
+    #sign-up-form>label,
+    #log-in-form>label,
+    #update-name-form>label {
+        padding: 0;
+        width: 93%;
+        border-radius: unset;
+        border: none;
+        font-size: 20px;
+    }
+
+    #log-in-form>input,
+    #sign-up-form>input,
+    #update-name {
+        width: 100%;
+    }
+
+    #update-name-form {
+        display: flex;
+        justify-content: space-evenly;
+        align-content: stretch;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: -15%;
+    }
+
+    #sign-up-google-btn {
+        width: 21%;
+        height: 2%;
+        border-radius: 50%;
+    }
+
+    .index-buttons {
+        font-family: monospace;
+        font-size: 24px;
+        border-radius: -2.8rem;
+        margin-bottom: 8%;
+        margin-top: 11%;
+        padding: 3%;
+    }
+
+    #graphics-div {
+        background-color: #f3f0f0e0;
+        width: 112%;
+    }
+
+    #question_form {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+        height: auto;
+    }
+
+    body #question_form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #textQ {
+        font-family: monospace;
+        font-size: 24px;
+        color: white;
+        border: 2px solid white;
+        padding: 9% 3%;
+        margin: 3%;
+        text-align: center;
+        background-color: rgb(2 46 85 / 80%);
+        border-radius: 0.9rem;
+        margin-top: 6%;
+    }
+
+    #question_form>label {
+        border-style: groove;
+        color: white;
+        border-color: white;
+        border-radius: 0.5rem;
+        padding: 24px 5px;
+        margin: auto;
+        margin-top: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 68vw;
+        flex-flow: column wrap;
+        font-family: monospace;
+        font-size: 20px;
+    }
+
+    #question_form>label:hover {
+        background-color: white;
+        font-weight: bold;
+        color: black;
+        font-weight: bold;
+    }
+
+    #question-number {
+        font-size: 18px;
+    }
+
+    .inputClass {
+        display: none;
+    }
+
+    .results-sections {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-evenly;
+    }
+
+    .goback-btn {
+        background-color: rgb(228 158 54);
+        border: solid black;
+        color: #000000;
+        display: flex;
+        margin: auto;
+        font-family: monospace;
+        font-size: 1.6rem;
+        font-weight: 700;
+        padding: 0.75rem 1.65rem;
+        text-align: center;
+        width: 22%;
+        transform: rotate(-6deg);
+        margin-top: 22%;
+    }
+
+    #next-button {
+        background-color: white;
+        border: 0 solid black;
+        color: #000000;
+        display: flex;
+        margin: auto;
+        font-family: monospace;
+        font-size: 1.6rem;
+        font-weight: 700;
+        padding: 0.75rem 1.65rem;
+        text-align: center;
+        width: 35%;
+        transform: rotate(-6deg);
+    }
+
+    #quests {
+        position: absolute;
+        top: 2%;
+        left: 6%;
+        width: 61px;
+    }
+
+    #quest {
+        position: absolute;
+        top: 3%;
+        left: 84%;
+        width: 87px;
+    }
+
+    .results-sections {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #results-title {
+        text-align: center;
+        font-size: 250%;
+        margin-top: 10%;
+    }
+
+    #new-game-btn {
+        font-family: monospace;
+        font-size: 32px;
+        border-radius: 0.2rem;
+        margin-bottom: 8%;
+        margin-top: 7%;
+        padding: 2.6%;
+    }
+
+    #menu-btn {
+        font-family: monospace;
+        font-size: 41px;
+        border-radius: 0.2rem;
+        margin-bottom: 8%;
+        margin-top: 3%;
+        padding: 2%;
+    }
+
+    #graphics-container {
+        width: 62%;
+        margin-left: -22%;
+        display: block;
+        margin-left: 4%;
+        margin-right: 16%;
+    }
+    
+    #settings-container{
+        display: block;
+        width: 58%;
+    }
+
+    #update-name {
+        width: 93%;
+    }
+
+    #update-name-form >label {
+        display: block;
+        width: 93%;
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    .off {
+        display: none;
+    }
+
+
+
+
+
 }

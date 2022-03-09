@@ -60,6 +60,8 @@ async function getQuestions() {
             'incorrect_answers': item.incorrect_answers
         });
     });
+
+
     let response2 = await fetch(`https://api.trivia.willfry.co.uk/questions?categories=general_knowledge&limit=5`);
     let data2 = await response2.json();
     let final2 = await data2.map(item => {
@@ -73,6 +75,7 @@ async function getQuestions() {
     questions.forEach(question => {
         correctAnswers.push(question.correct_answer)
     });
+
 }
 
 async function paintQuiz() {
