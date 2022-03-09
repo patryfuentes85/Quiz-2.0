@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Quiz 2.0</title>
+</head>
+
+<body>
+
+    <form class="" id="question_form" action="">
+        <span id="question-number"></span>
+
+        <h2 id="textQ"></h2>
+        
+        <input type="radio" name="answerField" id="answer1" class="inputClass" required>
+        <label for="answer1"></label>
+        
+        <input type="radio" name="answerField" id="answer2" class="inputClass">
+        <label for="answer2"></label>
+        
+        <input type="radio" name="answerField" id="answer3" class="inputClass">
+        <label for="answer3"></label>
+        
+        <input type="radio" name="answerField" id="answer4" class="inputClass">
+        <label for="answer4"></label>
+    
+        <input type='submit' value='Next' id='next-button' name='next-button'>
+
+    </form>
+
+    <img id="quests" src="../assets/qmark-01.png" alt="questionSymbol">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/quiz.js" type="module"></script>
+
+
+</body>
+
+</html>
