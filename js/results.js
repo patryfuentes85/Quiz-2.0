@@ -1,7 +1,29 @@
 // *** FIREBASE SETUP ***:
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, deleteUser, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    updateProfile,
+    deleteUser,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {
+    getFirestore,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    setDoc,
+    updateDoc,
+    deleteDoc,
+    arrayUnion,
+    arrayRemove
+} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDA3yVi5k-EuRIZJhvRonfFrR2fia0c_Pg",
@@ -16,6 +38,10 @@ const db = getFirestore();
 const auth = getAuth();
 
 
+
+const correctLegend = document.querySelector('#correct');
+const incorrectLegend = document.querySelector('#incorrect');
+
 // Logged user observer:
 const isUserLogged = async () => {
     auth.onAuthStateChanged((user) => {
@@ -26,6 +52,10 @@ const isUserLogged = async () => {
             userName = user.displayName;
             getResults(user.email)
                 .then(results => getChart(results))
+                .then(results => {
+                    correctLegend.innerText = `Correct: ${results[results.length - 1].correct}`;
+                    incorrectLegend.innerText = `Incorrect: ${results[results.length - 1].incorrect}`;
+                })
 
         } else {
             console.log('No logged user');
@@ -48,32 +78,39 @@ const getResults = async (userId) => {
 const getChart = (results) => {
     const data = {
         labels: [
-          'Correct',
-          'Incorrect'
         ],
         datasets: [{
-          label: 'Results',
-          data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
-          backgroundColor: [
-            'rgb(0, 255, 0)',
-            'rgb(255, 0, 0)'
-          ]
+            label: 'Results',
+            data: [results[results.length - 1].correct, results[results.length - 1].incorrect],
+            backgroundColor: [
+                'rgb(1, 89, 15)',
+                'rgb(203, 50, 52)'
+            ],
+            borderColor: ['lightgrey']
         }]
-      };
-      const config = {
+    };
+    const config = {
         type: 'doughnut',
         data: data,
-      };
-      resultsChart = new Chart(document.getElementById('results-chart'),
-      config
+        options: {
+            legend: {
+                labels: {
+                    fontColor: 'white',
+                }
+            }
+        }
+    };
+    resultsChart = new Chart(document.getElementById('results-chart'),
+        config
     );
+    return results
 }
 
-const asyncLauncher = async() => {
-    const a = await isUserLogged();
-    const b = await getResults();
-    getChart(b);
-}
+// const init = async() => {
+//     await isUserLogged();
+//     const data = await getResults();
+//     getChart(data);
+// }
 
 //////////////
 let userLogged = false;
@@ -85,10 +122,12 @@ isUserLogged()
 
 const newGameBtn = document.querySelector('#new-game-btn');
 newGameBtn.addEventListener('click', () => {
+    resultsChart.destroy()
     window.location.href = "../pages/quiz.html";
 })
 
 const menuBtn = document.querySelector('#menu-btn');
 menuBtn.addEventListener('click', () => {
+    resultsChart.destroy()
     window.location.href = "../index.html";
 })
